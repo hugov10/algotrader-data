@@ -1588,5 +1588,186 @@
     ],
     "count": 37,
     "sentiment": "bullish"
+  },
+  "backtesting": {
+    "timestamp": "2026-04-30 22:08",
+    "period_start": "2025-04-30",
+    "period_end": "2026-04-30",
+    "metricas": {
+      "total_trades": 306,
+      "win_rate": 41.5,
+      "profit_factor": 1.05,
+      "sharpe_ratio": 0.1,
+      "max_drawdown": 54.0,
+      "total_pnl": 135082.0,
+      "total_return": 13.5,
+      "avg_win": 24269.0,
+      "avg_loss": -16745.0,
+      "avg_days": 7.7,
+      "exit_breakdown": {
+        "SL": 131,
+        "TIMEOUT": 100,
+        "TP1": 65,
+        "TP2": 10
+      },
+      "top_trades": [
+        {
+          "entry_date": "2025-10-27",
+          "exit_date": "2025-10-29",
+          "pnl": 59994.0,
+          "pnl_pct": 28.08,
+          "exit_type": "TP2"
+        },
+        {
+          "entry_date": "2025-10-24",
+          "exit_date": "2025-10-28",
+          "pnl": 59991.0,
+          "pnl_pct": 20.34,
+          "exit_type": "TP2"
+        },
+        {
+          "entry_date": "2025-10-17",
+          "exit_date": "2025-10-27",
+          "pnl": 59844.0,
+          "pnl_pct": 17.77,
+          "exit_type": "TP2"
+        }
+      ],
+      "worst_trades": [
+        {
+          "entry_date": "2026-02-20",
+          "exit_date": "2026-02-24",
+          "pnl": -20000.0,
+          "pnl_pct": -5.27,
+          "exit_type": "SL"
+        },
+        {
+          "entry_date": "2026-01-26",
+          "exit_date": "2026-01-29",
+          "pnl": -20000.0,
+          "pnl_pct": -5.99,
+          "exit_type": "SL"
+        },
+        {
+          "entry_date": "2026-02-12",
+          "exit_date": "2026-02-18",
+          "pnl": -19999.0,
+          "pnl_pct": -3.76,
+          "exit_type": "SL"
+        }
+      ],
+      "capital_ini": 1000000,
+      "capital_final": 1135082.0,
+      "monthly_curve": [
+        1000000,
+        681101.0,
+        628484.0,
+        863807.0,
+        1522705.0,
+        1576986.0,
+        1269828.0,
+        1626090.0,
+        1614833.0,
+        1377071.0,
+        1080651.0,
+        835322.0,
+        919624.0,
+        997562.0,
+        1249021.0,
+        1141743.0
+      ]
+    },
+    "ticker_results": [
+      {
+        "sym": "YPFD",
+        "trades": 16,
+        "win_rate": 68.8,
+        "total_pnl": 203521.0
+      },
+      {
+        "sym": "TECO2",
+        "trades": 12,
+        "win_rate": 50.0,
+        "total_pnl": 124552.0
+      },
+      {
+        "sym": "BYMA",
+        "trades": 12,
+        "win_rate": 50.0,
+        "total_pnl": 110732.0
+      },
+      {
+        "sym": "TGSU2",
+        "trades": 17,
+        "win_rate": 58.8,
+        "total_pnl": 100652.0
+      },
+      {
+        "sym": "ALUA",
+        "trades": 16,
+        "win_rate": 43.8,
+        "total_pnl": 38247.0
+      },
+      {
+        "sym": "BMA",
+        "trades": 10,
+        "win_rate": 50.0,
+        "total_pnl": 26558.0
+      },
+      {
+        "sym": "COME",
+        "trades": 11,
+        "win_rate": 54.5,
+        "total_pnl": 25341.0
+      },
+      {
+        "sym": "CRES",
+        "trades": 15,
+        "win_rate": 53.3,
+        "total_pnl": 23655.0
+      },
+      {
+        "sym": "METR",
+        "trades": 10,
+        "win_rate": 40.0,
+        "total_pnl": 10309.0
+      },
+      {
+        "sym": "TXAR",
+        "trades": 16,
+        "win_rate": 43.8,
+        "total_pnl": 3344.0
+      },
+      {
+        "sym": "SUPV",
+        "trades": 10,
+        "win_rate": 30.0,
+        "total_pnl": 2443.0
+      },
+      {
+        "sym": "PAMP",
+        "trades": 17,
+        "win_rate": 41.2,
+        "total_pnl": -6807.0
+      },
+      {
+        "sym": "CEPU",
+        "trades": 14,
+        "win_rate": 35.7,
+        "total_pnl": -10670.0
+      },
+      {
+        "sym": "TRAN",
+        "trades": 14,
+        "win_rate": 42.9,
+        "total_pnl": -19422.0
+      },
+      {
+        "sym": "BBAR",
+        "trades": 13,
+        "win_rate": 46.2,
+        "total_pnl": -23936.0
+      }
+    ]
   }
 }
