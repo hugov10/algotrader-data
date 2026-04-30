@@ -1,7 +1,12 @@
 {
-  "timestamp": "2026-04-30 10:32",
+  "timestamp": "2026-04-30 11:15",
   "fecha": "30/04/2026",
-  "hora": "10:32",
+  "hora": "11:15",
+  "lstm_config": {
+    "look_back": 60,
+    "predict_days": 5,
+    "lstm_units": 32
+  },
   "panel": {
     "data": [
       {
@@ -23,7 +28,15 @@
         "sup": 1560.0,
         "res": 1920.0,
         "bid": 1803.19,
-        "ask": 1806.8
+        "ask": 1806.8,
+        "lstm": {
+          "prob": 0.432,
+          "direction": "bearish",
+          "conf": 13.5,
+          "accuracy": 43.9,
+          "target": 1797.69,
+          "days": 5
+        }
       },
       {
         "sym": "TECO2",
@@ -44,7 +57,15 @@
         "sup": 3187.5,
         "res": 3712.5,
         "bid": 3618.88,
-        "ask": 3626.12
+        "ask": 3626.12,
+        "lstm": {
+          "prob": 0.473,
+          "direction": "neutral",
+          "conf": 5.3,
+          "accuracy": 43.9,
+          "target": 3616.7,
+          "days": 5
+        }
       },
       {
         "sym": "BYMA",
@@ -65,7 +86,15 @@
         "sup": 301.5,
         "res": 349.98,
         "bid": 301.95,
-        "ask": 302.55
+        "ask": 302.55,
+        "lstm": {
+          "prob": 0.411,
+          "direction": "bearish",
+          "conf": 17.8,
+          "accuracy": 58.5,
+          "target": 300.63,
+          "days": 5
+        }
       },
       {
         "sym": "TGNO4",
@@ -86,7 +115,15 @@
         "sup": 3990.0,
         "res": 4840.0,
         "bid": 4028.47,
-        "ask": 4036.53
+        "ask": 4036.53,
+        "lstm": {
+          "prob": 0.408,
+          "direction": "bearish",
+          "conf": 18.5,
+          "accuracy": 58.5,
+          "target": 4010.16,
+          "days": 5
+        }
       },
       {
         "sym": "YPFD",
@@ -107,7 +144,15 @@
         "sup": 57550.0,
         "res": 72050.0,
         "bid": 66957.98,
-        "ask": 67092.02
+        "ask": 67092.02,
+        "lstm": {
+          "prob": 0.466,
+          "direction": "neutral",
+          "conf": 6.7,
+          "accuracy": 36.6,
+          "target": 66889.51,
+          "days": 5
+        }
       },
       {
         "sym": "AUSO",
@@ -128,49 +173,15 @@
         "sup": 3365.0,
         "res": 3990.0,
         "bid": 3416.58,
-        "ask": 3423.42
-      },
-      {
-        "sym": "INVJ",
-        "price": 447.0,
-        "chgPct": 0.0,
-        "vol": 44509,
-        "volRatio": 0.88,
-        "rsi": 38.0,
-        "macd": "neutral",
-        "trend": "uptrend",
-        "bb": "lower",
-        "score": 74,
-        "rec": "BUY",
-        "sl": 424.03,
-        "sl_pct": 5.14,
-        "tp1": 481.46,
-        "tp2": 515.91,
-        "sup": 435.0,
-        "res": 522.0,
-        "bid": 446.55,
-        "ask": 447.45
-      },
-      {
-        "sym": "IRSA",
-        "price": 2115.0,
-        "chgPct": -3.2,
-        "vol": 129951,
-        "volRatio": 1.11,
-        "rsi": 37.8,
-        "macd": "bearish",
-        "trend": "uptrend",
-        "bb": "lower",
-        "score": 73,
-        "rec": "BUY",
-        "sl": 2003.57,
-        "sl_pct": 5.27,
-        "tp1": 2282.14,
-        "tp2": 2449.29,
-        "sup": 2105.0,
-        "res": 2525.0,
-        "bid": 2112.89,
-        "ask": 2117.11
+        "ask": 3423.42,
+        "lstm": {
+          "prob": 0.417,
+          "direction": "bearish",
+          "conf": 16.6,
+          "accuracy": 61.0,
+          "target": 3402.96,
+          "days": 5
+        }
       },
       {
         "sym": "VALO",
@@ -191,7 +202,15 @@
         "sup": 591.03,
         "res": 749.4,
         "bid": 637.86,
-        "ask": 639.14
+        "ask": 639.14,
+        "lstm": {
+          "prob": 0.498,
+          "direction": "neutral",
+          "conf": 0.3,
+          "accuracy": 53.7,
+          "target": 638.43,
+          "days": 5
+        }
       },
       {
         "sym": "CRES",
@@ -212,7 +231,15 @@
         "sup": 1601.0,
         "res": 1890.0,
         "bid": 1677.32,
-        "ask": 1680.68
+        "ask": 1680.68,
+        "lstm": {
+          "prob": 0.455,
+          "direction": "neutral",
+          "conf": 9.0,
+          "accuracy": 56.1,
+          "target": 1674.48,
+          "days": 5
+        }
       },
       {
         "sym": "MOLI",
@@ -233,7 +260,15 @@
         "sup": 2375.0,
         "res": 2950.0,
         "bid": 2777.22,
-        "ask": 2782.78
+        "ask": 2782.78,
+        "lstm": {
+          "prob": 0.415,
+          "direction": "bearish",
+          "conf": 17.1,
+          "accuracy": 63.4,
+          "target": 2765.77,
+          "days": 5
+        }
       },
       {
         "sym": "LOMA",
@@ -254,7 +289,15 @@
         "sup": 3067.5,
         "res": 3712.5,
         "bid": 3261.74,
-        "ask": 3268.26
+        "ask": 3268.26,
+        "lstm": {
+          "prob": 0.432,
+          "direction": "bearish",
+          "conf": 13.5,
+          "accuracy": 53.7,
+          "target": 3251.77,
+          "days": 5
+        }
       },
       {
         "sym": "TRAN",
@@ -275,7 +318,15 @@
         "sup": 3610.0,
         "res": 4375.0,
         "bid": 3881.11,
-        "ask": 3888.88
+        "ask": 3888.88,
+        "lstm": {
+          "prob": 0.523,
+          "direction": "neutral",
+          "conf": 4.7,
+          "accuracy": 46.3,
+          "target": 3890.46,
+          "days": 5
+        }
       },
       {
         "sym": "CTIO",
@@ -296,28 +347,15 @@
         "sup": 1690.0,
         "res": 1915.0,
         "bid": 1893.11,
-        "ask": 1896.89
-      },
-      {
-        "sym": "CEPU",
-        "price": 2151.0,
-        "chgPct": -3.02,
-        "vol": 891297,
-        "volRatio": 0.72,
-        "rsi": 39.1,
-        "macd": "neutral",
-        "trend": "uptrend",
-        "bb": "middle",
-        "score": 59,
-        "rec": "HOLD",
-        "sl": 2042.19,
-        "sl_pct": 5.06,
-        "tp1": 2314.22,
-        "tp2": 2477.44,
-        "sup": 2131.0,
-        "res": 2567.5,
-        "bid": 2148.85,
-        "ask": 2153.15
+        "ask": 1896.89,
+        "lstm": {
+          "prob": 0.414,
+          "direction": "bearish",
+          "conf": 17.2,
+          "accuracy": 58.5,
+          "target": 1885.2,
+          "days": 5
+        }
       },
       {
         "sym": "ALUA",
@@ -338,7 +376,44 @@
         "sup": 885.0,
         "res": 1030.0,
         "bid": 985.01,
-        "ask": 986.99
+        "ask": 986.99,
+        "lstm": {
+          "prob": 0.46,
+          "direction": "neutral",
+          "conf": 8.0,
+          "accuracy": 53.7,
+          "target": 983.62,
+          "days": 5
+        }
+      },
+      {
+        "sym": "CEPU",
+        "price": 2151.0,
+        "chgPct": -3.02,
+        "vol": 891297,
+        "volRatio": 0.72,
+        "rsi": 39.1,
+        "macd": "neutral",
+        "trend": "uptrend",
+        "bb": "middle",
+        "score": 57,
+        "rec": "HOLD",
+        "sl": 2042.19,
+        "sl_pct": 5.06,
+        "tp1": 2314.22,
+        "tp2": 2477.44,
+        "sup": 2131.0,
+        "res": 2567.5,
+        "bid": 2148.85,
+        "ask": 2153.15,
+        "lstm": {
+          "prob": 0.344,
+          "direction": "bearish",
+          "conf": 31.3,
+          "accuracy": 65.9,
+          "target": 2130.83,
+          "days": 5
+        }
       },
       {
         "sym": "CARC",
@@ -359,7 +434,15 @@
         "sup": 22.9,
         "res": 25.6,
         "bid": 24.33,
-        "ask": 24.37
+        "ask": 24.37,
+        "lstm": {
+          "prob": 0.406,
+          "direction": "bearish",
+          "conf": 18.8,
+          "accuracy": 68.3,
+          "target": 24.21,
+          "days": 5
+        }
       },
       {
         "sym": "CADO",
@@ -371,7 +454,7 @@
         "macd": "neutral",
         "trend": "uptrend",
         "bb": "upper",
-        "score": 53,
+        "score": 52,
         "rec": "HOLD",
         "sl": 543.43,
         "sl_pct": 3.13,
@@ -380,7 +463,15 @@
         "sup": 540.0,
         "res": 578.0,
         "bid": 560.44,
-        "ask": 561.56
+        "ask": 561.56,
+        "lstm": {
+          "prob": 0.389,
+          "direction": "bearish",
+          "conf": 22.3,
+          "accuracy": 75.6,
+          "target": 557.25,
+          "days": 5
+        }
       },
       {
         "sym": "PAMP",
@@ -401,7 +492,15 @@
         "sup": 4622.5,
         "res": 5325.0,
         "bid": 4952.54,
-        "ask": 4962.46
+        "ask": 4962.46,
+        "lstm": {
+          "prob": 0.491,
+          "direction": "neutral",
+          "conf": 1.8,
+          "accuracy": 46.3,
+          "target": 4954.85,
+          "days": 5
+        }
       },
       {
         "sym": "TGSU2",
@@ -422,7 +521,15 @@
         "sup": 8630.0,
         "res": 10700.0,
         "bid": 9195.8,
-        "ask": 9214.2
+        "ask": 9214.2,
+        "lstm": {
+          "prob": 0.483,
+          "direction": "neutral",
+          "conf": 3.3,
+          "accuracy": 39.0,
+          "target": 9195.76,
+          "days": 5
+        }
       },
       {
         "sym": "GARO",
@@ -443,28 +550,15 @@
         "sup": 210.0,
         "res": 270.0,
         "bid": 258.24,
-        "ask": 258.76
-      },
-      {
-        "sym": "TXAR",
-        "price": 672.0,
-        "chgPct": -3.03,
-        "vol": 639449,
-        "volRatio": 0.5,
-        "rsi": 45.8,
-        "macd": "bearish",
-        "trend": "uptrend",
-        "bb": "middle",
-        "score": 47,
-        "rec": "HOLD",
-        "sl": 636.39,
-        "sl_pct": 5.3,
-        "tp1": 725.42,
-        "tp2": 778.84,
-        "sup": 642.34,
-        "res": 745.0,
-        "bid": 671.33,
-        "ask": 672.67
+        "ask": 258.76,
+        "lstm": {
+          "prob": 0.492,
+          "direction": "neutral",
+          "conf": 1.6,
+          "accuracy": 24.4,
+          "target": 258.38,
+          "days": 5
+        }
       },
       {
         "sym": "CECO2",
@@ -485,7 +579,15 @@
         "sup": 402.0,
         "res": 477.0,
         "bid": 454.55,
-        "ask": 455.45
+        "ask": 455.45,
+        "lstm": {
+          "prob": 0.448,
+          "direction": "bearish",
+          "conf": 10.4,
+          "accuracy": 36.6,
+          "target": 453.58,
+          "days": 5
+        }
       },
       {
         "sym": "FERR",
@@ -506,7 +608,15 @@
         "sup": 20.4,
         "res": 24.3,
         "bid": 20.53,
-        "ask": 20.57
+        "ask": 20.57,
+        "lstm": {
+          "prob": 0.403,
+          "direction": "bearish",
+          "conf": 19.4,
+          "accuracy": 75.6,
+          "target": 20.43,
+          "days": 5
+        }
       },
       {
         "sym": "GGAL",
@@ -527,7 +637,15 @@
         "sup": 6305.0,
         "res": 7255.0,
         "bid": 6373.62,
-        "ask": 6386.38
+        "ask": 6386.38,
+        "lstm": {
+          "prob": 0.445,
+          "direction": "bearish",
+          "conf": 11.1,
+          "accuracy": 53.7,
+          "target": 6358.78,
+          "days": 5
+        }
       },
       {
         "sym": "BHIP",
@@ -548,7 +666,15 @@
         "sup": 331.0,
         "res": 396.0,
         "bid": 335.66,
-        "ask": 336.34
+        "ask": 336.34,
+        "lstm": {
+          "prob": 0.439,
+          "direction": "bearish",
+          "conf": 12.3,
+          "accuracy": 65.9,
+          "target": 334.76,
+          "days": 5
+        }
       },
       {
         "sym": "METR",
@@ -569,7 +695,15 @@
         "sup": 1841.0,
         "res": 2249.0,
         "bid": 1881.12,
-        "ask": 1884.88
+        "ask": 1884.88,
+        "lstm": {
+          "prob": 0.424,
+          "direction": "bearish",
+          "conf": 15.1,
+          "accuracy": 68.3,
+          "target": 1874.46,
+          "days": 5
+        }
       },
       {
         "sym": "MORI",
@@ -590,7 +724,15 @@
         "sup": 28.1,
         "res": 33.5,
         "bid": 28.57,
-        "ask": 28.63
+        "ask": 28.63,
+        "lstm": {
+          "prob": 0.473,
+          "direction": "neutral",
+          "conf": 5.4,
+          "accuracy": 56.1,
+          "target": 28.55,
+          "days": 5
+        }
       },
       {
         "sym": "MIRG",
@@ -611,7 +753,15 @@
         "sup": 17675.0,
         "res": 19500.0,
         "bid": 19055.92,
-        "ask": 19094.07
+        "ask": 19094.07,
+        "lstm": {
+          "prob": 0.45,
+          "direction": "bearish",
+          "conf": 10.0,
+          "accuracy": 58.5,
+          "target": 19017.59,
+          "days": 5
+        }
       },
       {
         "sym": "SUPV",
@@ -632,7 +782,73 @@
         "sup": 2510.0,
         "res": 3000.0,
         "bid": 2544.95,
-        "ask": 2550.05
+        "ask": 2550.05,
+        "lstm": {
+          "prob": 0.437,
+          "direction": "bearish",
+          "conf": 12.5,
+          "accuracy": 56.1,
+          "target": 2537.92,
+          "days": 5
+        }
+      },
+      {
+        "sym": "IRSA",
+        "price": 2115.0,
+        "chgPct": -3.2,
+        "vol": 129951,
+        "volRatio": 1.11,
+        "rsi": 37.8,
+        "macd": "bearish",
+        "trend": "downtrend",
+        "bb": "lower",
+        "score": 39,
+        "rec": "SELL",
+        "sl": 2003.57,
+        "sl_pct": 5.27,
+        "tp1": 2282.14,
+        "tp2": 2449.29,
+        "sup": 2105.0,
+        "res": 2525.0,
+        "bid": 2112.89,
+        "ask": 2117.11,
+        "lstm": {
+          "prob": 0.502,
+          "direction": "neutral",
+          "conf": 0.4,
+          "accuracy": 29.3,
+          "target": 2115.24,
+          "days": 5
+        }
+      },
+      {
+        "sym": "INVJ",
+        "price": 447.0,
+        "chgPct": 0.0,
+        "vol": 44509,
+        "volRatio": 0.88,
+        "rsi": 38.0,
+        "macd": "neutral",
+        "trend": "downtrend",
+        "bb": "lower",
+        "score": 38,
+        "rec": "SELL",
+        "sl": 424.03,
+        "sl_pct": 5.14,
+        "tp1": 481.46,
+        "tp2": 515.91,
+        "sup": 435.0,
+        "res": 522.0,
+        "bid": 446.55,
+        "ask": 447.45,
+        "lstm": {
+          "prob": 0.297,
+          "direction": "bearish",
+          "conf": 40.6,
+          "accuracy": 70.7,
+          "target": 441.56,
+          "days": 5
+        }
       },
       {
         "sym": "BBAR",
@@ -653,7 +869,15 @@
         "sup": 7005.0,
         "res": 8350.0,
         "bid": 7112.88,
-        "ask": 7127.12
+        "ask": 7127.12,
+        "lstm": {
+          "prob": 0.435,
+          "direction": "bearish",
+          "conf": 13.0,
+          "accuracy": 53.7,
+          "target": 7092.18,
+          "days": 5
+        }
       },
       {
         "sym": "BMA",
@@ -674,28 +898,15 @@
         "sup": 10320.0,
         "res": 12260.0,
         "bid": 10939.05,
-        "ask": 10960.95
-      },
-      {
-        "sym": "COME",
-        "price": 46.19,
-        "chgPct": -1.77,
-        "vol": 2702725,
-        "volRatio": 0.24,
-        "rsi": 43.0,
-        "macd": "bearish",
-        "trend": "downtrend",
-        "bb": "lower",
-        "score": 34,
-        "rec": "SELL",
-        "sl": 43.61,
-        "sl_pct": 5.59,
-        "tp1": 50.06,
-        "tp2": 53.94,
-        "sup": 45.9,
-        "res": 56.5,
-        "bid": 46.14,
-        "ask": 46.24
+        "ask": 10960.95,
+        "lstm": {
+          "prob": 0.438,
+          "direction": "bearish",
+          "conf": 12.5,
+          "accuracy": 56.1,
+          "target": 10908.98,
+          "days": 5
+        }
       },
       {
         "sym": "EDN",
@@ -716,28 +927,15 @@
         "sup": 1850.0,
         "res": 2350.0,
         "bid": 1888.11,
-        "ask": 1891.89
-      },
-      {
-        "sym": "AGRO",
-        "price": 44.1,
-        "chgPct": -0.45,
-        "vol": 605834,
-        "volRatio": 0.45,
-        "rsi": 39.7,
-        "macd": "bearish",
-        "trend": "downtrend",
-        "bb": "lower",
-        "score": 34,
-        "rec": "SELL",
-        "sl": 41.55,
-        "sl_pct": 5.79,
-        "tp1": 47.93,
-        "tp2": 51.76,
-        "sup": 43.0,
-        "res": 50.0,
-        "bid": 44.06,
-        "ask": 44.14
+        "ask": 1891.89,
+        "lstm": {
+          "prob": 0.431,
+          "direction": "bearish",
+          "conf": 13.7,
+          "accuracy": 53.7,
+          "target": 1882.23,
+          "days": 5
+        }
       },
       {
         "sym": "CELU",
@@ -758,7 +956,73 @@
         "sup": 267.5,
         "res": 302.0,
         "bid": 277.72,
-        "ask": 278.28
+        "ask": 278.28,
+        "lstm": {
+          "prob": 0.417,
+          "direction": "bearish",
+          "conf": 16.6,
+          "accuracy": 61.0,
+          "target": 276.61,
+          "days": 5
+        }
+      },
+      {
+        "sym": "AGRO",
+        "price": 44.1,
+        "chgPct": -0.45,
+        "vol": 605834,
+        "volRatio": 0.45,
+        "rsi": 39.7,
+        "macd": "bearish",
+        "trend": "downtrend",
+        "bb": "lower",
+        "score": 32,
+        "rec": "SELL",
+        "sl": 41.55,
+        "sl_pct": 5.79,
+        "tp1": 47.93,
+        "tp2": 51.76,
+        "sup": 43.0,
+        "res": 50.0,
+        "bid": 44.06,
+        "ask": 44.14,
+        "lstm": {
+          "prob": 0.375,
+          "direction": "bearish",
+          "conf": 25.0,
+          "accuracy": 70.7,
+          "target": 43.77,
+          "days": 5
+        }
+      },
+      {
+        "sym": "COME",
+        "price": 46.19,
+        "chgPct": -1.77,
+        "vol": 2702725,
+        "volRatio": 0.24,
+        "rsi": 43.0,
+        "macd": "bearish",
+        "trend": "downtrend",
+        "bb": "lower",
+        "score": 31,
+        "rec": "SELL",
+        "sl": 43.61,
+        "sl_pct": 5.59,
+        "tp1": 50.06,
+        "tp2": 53.94,
+        "sup": 45.9,
+        "res": 56.5,
+        "bid": 46.14,
+        "ask": 46.24,
+        "lstm": {
+          "prob": 0.242,
+          "direction": "bearish",
+          "conf": 51.6,
+          "accuracy": 61.0,
+          "target": 45.47,
+          "days": 5
+        }
       },
       {
         "sym": "LEDE",
@@ -779,7 +1043,15 @@
         "sup": 715.0,
         "res": 875.0,
         "bid": 826.67,
-        "ask": 828.33
+        "ask": 828.33,
+        "lstm": {
+          "prob": 0.462,
+          "direction": "neutral",
+          "conf": 7.6,
+          "accuracy": 46.3,
+          "target": 825.61,
+          "days": 5
+        }
       },
       {
         "sym": "SAMI",
@@ -791,7 +1063,7 @@
         "macd": "neutral",
         "trend": "downtrend",
         "bb": "lower",
-        "score": 28,
+        "score": 26,
         "rec": "SELL",
         "sl": 500.91,
         "sl_pct": 6.2,
@@ -800,10 +1072,48 @@
         "sup": 520.0,
         "res": 573.0,
         "bid": 533.47,
-        "ask": 534.53
+        "ask": 534.53,
+        "lstm": {
+          "prob": 0.374,
+          "direction": "bearish",
+          "conf": 25.2,
+          "accuracy": 63.4,
+          "target": 529.97,
+          "days": 5
+        }
+      },
+      {
+        "sym": "TXAR",
+        "price": 672.0,
+        "chgPct": -3.03,
+        "vol": 639449,
+        "volRatio": 0.5,
+        "rsi": 45.8,
+        "macd": "bearish",
+        "trend": "downtrend",
+        "bb": "middle",
+        "score": 21,
+        "rec": "STRONG_SELL",
+        "sl": 636.39,
+        "sl_pct": 5.3,
+        "tp1": 725.42,
+        "tp2": 778.84,
+        "sup": 642.34,
+        "res": 745.0,
+        "bid": 671.33,
+        "ask": 672.67,
+        "lstm": {
+          "prob": 0.304,
+          "direction": "bearish",
+          "conf": 39.1,
+          "accuracy": 63.4,
+          "target": 664.11,
+          "days": 5
+        }
       }
     ],
     "count": 38,
+    "lstm_count": 38,
     "sentiment": "bearish"
   },
   "cedear": {
@@ -818,7 +1128,7 @@
         "macd": "bullish",
         "trend": "uptrend",
         "bb": "middle",
-        "score": 82,
+        "score": 83,
         "rec": "STRONG_BUY",
         "sl": 22320.86,
         "sl_pct": 3.12,
@@ -827,7 +1137,15 @@
         "sup": 20510.0,
         "res": 25720.0,
         "bid": 23016.96,
-        "ask": 23063.04
+        "ask": 23063.04,
+        "lstm": {
+          "prob": 0.612,
+          "direction": "bullish",
+          "conf": 22.4,
+          "accuracy": 61.0,
+          "target": 23194.66,
+          "days": 5
+        }
       },
       {
         "sym": "CVX",
@@ -848,7 +1166,15 @@
         "sup": 16050.0,
         "res": 19810.0,
         "bid": 17892.09,
-        "ask": 17927.91
+        "ask": 17927.91,
+        "lstm": {
+          "prob": 0.545,
+          "direction": "neutral",
+          "conf": 8.9,
+          "accuracy": 65.9,
+          "target": 17957.96,
+          "days": 5
+        }
       },
       {
         "sym": "VALE",
@@ -869,7 +1195,15 @@
         "sup": 11300.0,
         "res": 13130.0,
         "bid": 11808.18,
-        "ask": 11831.82
+        "ask": 11831.82,
+        "lstm": {
+          "prob": 0.569,
+          "direction": "bullish",
+          "conf": 13.7,
+          "accuracy": 43.9,
+          "target": 11868.71,
+          "days": 5
+        }
       },
       {
         "sym": "GLD",
@@ -890,7 +1224,15 @@
         "sup": 12350.0,
         "res": 13100.0,
         "bid": 12437.55,
-        "ask": 12462.45
+        "ask": 12462.45,
+        "lstm": {
+          "prob": 0.56,
+          "direction": "bullish",
+          "conf": 12.0,
+          "accuracy": 38.5,
+          "target": 12494.71,
+          "days": 5
+        }
       },
       {
         "sym": "SLV",
@@ -911,7 +1253,15 @@
         "sup": 15690.0,
         "res": 18120.0,
         "bid": 16093.89,
-        "ask": 16126.11
+        "ask": 16126.11,
+        "lstm": {
+          "prob": 0.61,
+          "direction": "bullish",
+          "conf": 22.0,
+          "accuracy": 56.0,
+          "target": 16216.12,
+          "days": 5
+        }
       },
       {
         "sym": "JNJ",
@@ -932,7 +1282,15 @@
         "sup": 21920.0,
         "res": 24320.0,
         "bid": 22517.46,
-        "ask": 22562.54
+        "ask": 22562.54,
+        "lstm": {
+          "prob": 0.548,
+          "direction": "neutral",
+          "conf": 9.6,
+          "accuracy": 31.7,
+          "target": 22605.24,
+          "days": 5
+        }
       },
       {
         "sym": "PFE",
@@ -953,7 +1311,15 @@
         "sup": 9715.0,
         "res": 10670.0,
         "bid": 9795.19,
-        "ask": 9814.8
+        "ask": 9814.8,
+        "lstm": {
+          "prob": 0.54,
+          "direction": "neutral",
+          "conf": 8.0,
+          "accuracy": 41.5,
+          "target": 9828.62,
+          "days": 5
+        }
       },
       {
         "sym": "QCOM",
@@ -974,7 +1340,15 @@
         "sup": 16530.0,
         "res": 21910.0,
         "bid": 21168.81,
-        "ask": 21211.19
+        "ask": 21211.19,
+        "lstm": {
+          "prob": 0.55,
+          "direction": "neutral",
+          "conf": 9.9,
+          "accuracy": 78.0,
+          "target": 21252.97,
+          "days": 5
+        }
       },
       {
         "sym": "KO",
@@ -995,7 +1369,15 @@
         "sup": 21700.0,
         "res": 24390.0,
         "bid": 23466.51,
-        "ask": 23513.49
+        "ask": 23513.49,
+        "lstm": {
+          "prob": 0.493,
+          "direction": "neutral",
+          "conf": 1.4,
+          "accuracy": 56.1,
+          "target": 23480.3,
+          "days": 5
+        }
       },
       {
         "sym": "AMGN",
@@ -1016,7 +1398,15 @@
         "sup": 16680.0,
         "res": 17690.0,
         "bid": 16783.2,
-        "ask": 16816.8
+        "ask": 16816.8,
+        "lstm": {
+          "prob": 0.537,
+          "direction": "neutral",
+          "conf": 7.3,
+          "accuracy": 26.8,
+          "target": 16837.03,
+          "days": 5
+        }
       },
       {
         "sym": "V",
@@ -1037,7 +1427,15 @@
         "sup": 24110.0,
         "res": 28480.0,
         "bid": 27752.22,
-        "ask": 27807.78
+        "ask": 27807.78,
+        "lstm": {
+          "prob": 0.487,
+          "direction": "neutral",
+          "conf": 2.6,
+          "accuracy": 58.5,
+          "target": 27758.63,
+          "days": 5
+        }
       },
       {
         "sym": "WMT",
@@ -1058,7 +1456,15 @@
         "sup": 9910.0,
         "res": 10920.0,
         "bid": 10559.43,
-        "ask": 10580.57
+        "ask": 10580.57,
+        "lstm": {
+          "prob": 0.525,
+          "direction": "neutral",
+          "conf": 5.1,
+          "accuracy": 53.7,
+          "target": 10586.16,
+          "days": 5
+        }
       },
       {
         "sym": "INTC",
@@ -1079,7 +1485,15 @@
         "sup": 12300.0,
         "res": 28280.0,
         "bid": 28151.82,
-        "ask": 28208.18
+        "ask": 28208.18,
+        "lstm": {
+          "prob": 0.462,
+          "direction": "neutral",
+          "conf": 7.7,
+          "accuracy": 56.1,
+          "target": 28115.11,
+          "days": 5
+        }
       },
       {
         "sym": "GOOGL",
@@ -1100,7 +1514,15 @@
         "sup": 7055.0,
         "res": 9245.0,
         "bid": 9000.99,
-        "ask": 9019.01
+        "ask": 9019.01,
+        "lstm": {
+          "prob": 0.503,
+          "direction": "neutral",
+          "conf": 0.6,
+          "accuracy": 58.5,
+          "target": 9011.73,
+          "days": 5
+        }
       },
       {
         "sym": "NVDA",
@@ -1121,7 +1543,15 @@
         "sup": 10280.0,
         "res": 13710.0,
         "bid": 12947.04,
-        "ask": 12972.96
+        "ask": 12972.96,
+        "lstm": {
+          "prob": 0.51,
+          "direction": "neutral",
+          "conf": 1.9,
+          "accuracy": 53.7,
+          "target": 12967.43,
+          "days": 5
+        }
       },
       {
         "sym": "TSM",
@@ -1142,7 +1572,15 @@
         "sup": 52700.0,
         "res": 68925.0,
         "bid": 65109.82,
-        "ask": 65240.17
+        "ask": 65240.17,
+        "lstm": {
+          "prob": 0.598,
+          "direction": "bullish",
+          "conf": 19.6,
+          "accuracy": 43.9,
+          "target": 65557.93,
+          "days": 5
+        }
       },
       {
         "sym": "MCD",
@@ -1163,7 +1601,15 @@
         "sup": 18000.0,
         "res": 19200.0,
         "bid": 18051.93,
-        "ask": 18088.07
+        "ask": 18088.07,
+        "lstm": {
+          "prob": 0.464,
+          "direction": "neutral",
+          "conf": 7.2,
+          "accuracy": 78.0,
+          "target": 18031.07,
+          "days": 5
+        }
       },
       {
         "sym": "ARKK",
@@ -1184,7 +1630,15 @@
         "sup": 9475.0,
         "res": 11800.0,
         "bid": 10959.03,
-        "ask": 10980.97
+        "ask": 10980.97,
+        "lstm": {
+          "prob": 0.505,
+          "direction": "neutral",
+          "conf": 1.1,
+          "accuracy": 52.5,
+          "target": 10973.5,
+          "days": 5
+        }
       },
       {
         "sym": "AMZN",
@@ -1205,7 +1659,15 @@
         "sup": 2085.0,
         "res": 2767.5,
         "bid": 2709.79,
-        "ask": 2715.21
+        "ask": 2715.21,
+        "lstm": {
+          "prob": 0.52,
+          "direction": "neutral",
+          "conf": 4.1,
+          "accuracy": 68.3,
+          "target": 2715.82,
+          "days": 5
+        }
       },
       {
         "sym": "AMD",
@@ -1226,7 +1688,15 @@
         "sup": 29040.0,
         "res": 52550.0,
         "bid": 50074.88,
-        "ask": 50175.12
+        "ask": 50175.12,
+        "lstm": {
+          "prob": 0.47,
+          "direction": "neutral",
+          "conf": 5.9,
+          "accuracy": 68.3,
+          "target": 50035.91,
+          "days": 5
+        }
       },
       {
         "sym": "JPM",
@@ -1247,7 +1717,15 @@
         "sup": 27979.91,
         "res": 31940.0,
         "bid": 30729.24,
-        "ask": 30790.76
+        "ask": 30790.76,
+        "lstm": {
+          "prob": 0.533,
+          "direction": "neutral",
+          "conf": 6.5,
+          "accuracy": 53.7,
+          "target": 30820.06,
+          "days": 5
+        }
       },
       {
         "sym": "QQQ",
@@ -1268,7 +1746,15 @@
         "sup": 41580.0,
         "res": 50500.0,
         "bid": 49270.68,
-        "ask": 49369.32
+        "ask": 49369.32,
+        "lstm": {
+          "prob": 0.473,
+          "direction": "neutral",
+          "conf": 5.4,
+          "accuracy": 45.0,
+          "target": 49239.99,
+          "days": 5
+        }
       },
       {
         "sym": "BRKB",
@@ -1289,7 +1775,15 @@
         "sup": 31100.0,
         "res": 33080.0,
         "bid": 32247.72,
-        "ask": 32312.28
+        "ask": 32312.28,
+        "lstm": {
+          "prob": 0.475,
+          "direction": "neutral",
+          "conf": 5.0,
+          "accuracy": 68.3,
+          "target": 32231.66,
+          "days": 5
+        }
       },
       {
         "sym": "SPY",
@@ -1310,7 +1804,15 @@
         "sup": 47000.0,
         "res": 54375.0,
         "bid": 52996.95,
-        "ask": 53103.05
+        "ask": 53103.05,
+        "lstm": {
+          "prob": 0.466,
+          "direction": "neutral",
+          "conf": 6.8,
+          "accuracy": 47.5,
+          "target": 52941.46,
+          "days": 5
+        }
       },
       {
         "sym": "PYPL",
@@ -1331,7 +1833,15 @@
         "sup": 8110.0,
         "res": 9670.0,
         "bid": 9465.52,
-        "ask": 9484.47
+        "ask": 9484.47,
+        "lstm": {
+          "prob": 0.492,
+          "direction": "neutral",
+          "conf": 1.5,
+          "accuracy": 39.0,
+          "target": 9470.65,
+          "days": 5
+        }
       },
       {
         "sym": "GS",
@@ -1352,7 +1862,15 @@
         "sup": 92575.0,
         "res": 110200.0,
         "bid": 103796.1,
-        "ask": 104003.9
+        "ask": 104003.9,
+        "lstm": {
+          "prob": 0.608,
+          "direction": "bullish",
+          "conf": 21.7,
+          "accuracy": 82.9,
+          "target": 104574.94,
+          "days": 5
+        }
       },
       {
         "sym": "GLOB",
@@ -1373,7 +1891,15 @@
         "sup": 3320.0,
         "res": 4272.5,
         "bid": 3354.14,
-        "ask": 3360.86
+        "ask": 3360.86,
+        "lstm": {
+          "prob": 0.461,
+          "direction": "neutral",
+          "conf": 7.8,
+          "accuracy": 56.1,
+          "target": 3349.68,
+          "days": 5
+        }
       },
       {
         "sym": "LLY",
@@ -1394,7 +1920,15 @@
         "sup": 22670.0,
         "res": 25900.0,
         "bid": 22707.27,
-        "ask": 22752.73
+        "ask": 22752.73,
+        "lstm": {
+          "prob": 0.47,
+          "direction": "neutral",
+          "conf": 6.0,
+          "accuracy": 78.0,
+          "target": 22689.36,
+          "days": 5
+        }
       },
       {
         "sym": "AAPL",
@@ -1415,7 +1949,15 @@
         "sup": 18200.0,
         "res": 20580.0,
         "bid": 20069.91,
-        "ask": 20110.09
+        "ask": 20110.09,
+        "lstm": {
+          "prob": 0.456,
+          "direction": "neutral",
+          "conf": 8.8,
+          "accuracy": 51.2,
+          "target": 20037.11,
+          "days": 5
+        }
       },
       {
         "sym": "PEP",
@@ -1436,7 +1978,15 @@
         "sup": 12440.0,
         "res": 13260.0,
         "bid": 12867.12,
-        "ask": 12892.88
+        "ask": 12892.88,
+        "lstm": {
+          "prob": 0.509,
+          "direction": "neutral",
+          "conf": 1.7,
+          "accuracy": 51.2,
+          "target": 12886.69,
+          "days": 5
+        }
       },
       {
         "sym": "NFLX",
@@ -1457,7 +2007,15 @@
         "sup": 2830.0,
         "res": 3275.0,
         "bid": 2862.14,
-        "ask": 2867.86
+        "ask": 2867.86,
+        "lstm": {
+          "prob": 0.481,
+          "direction": "neutral",
+          "conf": 3.8,
+          "accuracy": 46.3,
+          "target": 2861.78,
+          "days": 5
+        }
       },
       {
         "sym": "SONY",
@@ -1478,7 +2036,15 @@
         "sup": 3680.0,
         "res": 4000.0,
         "bid": 3698.8,
-        "ask": 3706.2
+        "ask": 3706.2,
+        "lstm": {
+          "prob": 0.504,
+          "direction": "neutral",
+          "conf": 0.8,
+          "accuracy": 65.9,
+          "target": 3703.4,
+          "days": 5
+        }
       },
       {
         "sym": "MELI",
@@ -1499,7 +2065,15 @@
         "sup": 20010.0,
         "res": 23650.0,
         "bid": 21928.05,
-        "ask": 21971.95
+        "ask": 21971.95,
+        "lstm": {
+          "prob": 0.47,
+          "direction": "neutral",
+          "conf": 5.9,
+          "accuracy": 51.2,
+          "target": 21910.83,
+          "days": 5
+        }
       },
       {
         "sym": "MSFT",
@@ -1511,7 +2085,7 @@
         "macd": "neutral",
         "trend": "downtrend",
         "bb": "middle",
-        "score": 28,
+        "score": 29,
         "rec": "SELL",
         "sl": 20368.0,
         "sl_pct": 3.33,
@@ -1520,7 +2094,15 @@
         "sup": 17830.0,
         "res": 21710.0,
         "bid": 21048.93,
-        "ask": 21091.07
+        "ask": 21091.07,
+        "lstm": {
+          "prob": 0.669,
+          "direction": "bullish",
+          "conf": 33.9,
+          "accuracy": 78.0,
+          "target": 21284.22,
+          "days": 5
+        }
       },
       {
         "sym": "CRM",
@@ -1541,7 +2123,15 @@
         "sup": 13450.0,
         "res": 15830.0,
         "bid": 15024.96,
-        "ask": 15055.04
+        "ask": 15055.04,
+        "lstm": {
+          "prob": 0.481,
+          "direction": "neutral",
+          "conf": 3.8,
+          "accuracy": 58.5,
+          "target": 15022.68,
+          "days": 5
+        }
       },
       {
         "sym": "TSLA",
@@ -1562,7 +2152,15 @@
         "sup": 33220.0,
         "res": 39600.0,
         "bid": 37022.94,
-        "ask": 37097.06
+        "ask": 37097.06,
+        "lstm": {
+          "prob": 0.44,
+          "direction": "bearish",
+          "conf": 12.0,
+          "accuracy": 78.0,
+          "target": 36926.7,
+          "days": 5
+        }
       },
       {
         "sym": "UBER",
@@ -1583,10 +2181,19 @@
         "sup": 51575.0,
         "res": 58325.0,
         "bid": 55619.32,
-        "ask": 55730.67
+        "ask": 55730.67,
+        "lstm": {
+          "prob": 0.48,
+          "direction": "neutral",
+          "conf": 4.0,
+          "accuracy": 51.2,
+          "target": 55608.34,
+          "days": 5
+        }
       }
     ],
     "count": 37,
+    "lstm_count": 37,
     "sentiment": "bearish"
   }
 }
