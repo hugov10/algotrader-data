@@ -13,24 +13,24 @@
     "sentiment": "bearish"
   },
   "backtesting": {
-    "timestamp": "2026-05-25 03:09",
-    "period_start": "2025-05-25",
-    "period_end": "2026-05-25",
+    "timestamp": "2026-05-30 01:44",
+    "period_start": "2025-05-30",
+    "period_end": "2026-05-30",
     "metricas": {
-      "total_trades": 304,
-      "win_rate": 41.8,
-      "profit_factor": 1.05,
-      "sharpe_ratio": 0.14,
-      "max_drawdown": 48.5,
-      "total_pnl": 148290.0,
-      "total_return": 14.8,
-      "avg_win": 24273.0,
-      "avg_loss": -16768.0,
-      "avg_days": 7.4,
+      "total_trades": 322,
+      "win_rate": 44.1,
+      "profit_factor": 1.15,
+      "sharpe_ratio": 0.21,
+      "max_drawdown": 49.0,
+      "total_pnl": 447856.0,
+      "total_return": 44.8,
+      "avg_win": 24240.0,
+      "avg_loss": -16821.0,
+      "avg_days": 7.5,
       "exit_breakdown": {
-        "SL": 131,
-        "TIMEOUT": 99,
-        "TP1": 64,
+        "SL": 134,
+        "TIMEOUT": 104,
+        "TP1": 74,
         "TP2": 10
       },
       "top_trades": [
@@ -42,10 +42,10 @@
           "exit_type": "TP2"
         },
         {
-          "entry_date": "2025-10-23",
+          "entry_date": "2025-10-17",
           "exit_date": "2025-10-27",
-          "pnl": 59952.0,
-          "pnl_pct": 23.47,
+          "pnl": 59957.0,
+          "pnl_pct": 19.46,
           "exit_type": "TP2"
         },
         {
@@ -80,116 +80,117 @@
         }
       ],
       "capital_ini": 1000000,
-      "capital_final": 1148290.0,
+      "capital_final": 1447856.0,
       "monthly_curve": [
         1000000,
-        968306.0,
-        1121844.0,
-        1681265.0,
-        1644925.0,
-        1463177.0,
-        1894012.0,
-        1646548.0,
-        1372330.0,
-        1116717.0,
-        1197045.0,
-        1147715.0,
-        1460523.0,
-        1431716.0,
-        1310888.0,
-        1217456.0
+        1080329.0,
+        1281658.0,
+        1721324.0,
+        1530897.0,
+        1607576.0,
+        1839192.0,
+        1556183.0,
+        1323159.0,
+        1085787.0,
+        1155290.0,
+        1059336.0,
+        1361102.0,
+        1361595.0,
+        1205245.0,
+        1175367.0,
+        1388108.0
       ]
     },
     "ticker_results": [
       {
         "sym": "YPFD",
-        "trades": 14,
-        "win_rate": 71.4,
-        "total_pnl": 194126.0
+        "trades": 15,
+        "win_rate": 73.3,
+        "total_pnl": 223556.0
       },
       {
         "sym": "TGSU2",
         "trades": 18,
         "win_rate": 61.1,
-        "total_pnl": 116124.0
-      },
-      {
-        "sym": "COME",
-        "trades": 9,
-        "win_rate": 66.7,
-        "total_pnl": 65337.0
-      },
-      {
-        "sym": "TECO2",
-        "trades": 15,
-        "win_rate": 40.0,
-        "total_pnl": 64775.0
+        "total_pnl": 115882.0
       },
       {
         "sym": "ALUA",
-        "trades": 14,
-        "win_rate": 50.0,
-        "total_pnl": 63257.0
+        "trades": 17,
+        "win_rate": 52.9,
+        "total_pnl": 103257.0
       },
       {
-        "sym": "VALO",
-        "trades": 6,
-        "win_rate": 50.0,
-        "total_pnl": 40951.0
+        "sym": "TECO2",
+        "trades": 16,
+        "win_rate": 43.8,
+        "total_pnl": 94574.0
+      },
+      {
+        "sym": "CEPU",
+        "trades": 17,
+        "win_rate": 41.2,
+        "total_pnl": 71103.0
       },
       {
         "sym": "TRAN",
         "trades": 15,
-        "win_rate": 53.3,
-        "total_pnl": 36103.0
-      },
-      {
-        "sym": "METR",
-        "trades": 9,
-        "win_rate": 44.4,
-        "total_pnl": 30205.0
-      },
-      {
-        "sym": "MOLI",
-        "trades": 11,
-        "win_rate": 36.4,
-        "total_pnl": 29975.0
+        "win_rate": 60.0,
+        "total_pnl": 66547.0
       },
       {
         "sym": "BMA",
-        "trades": 10,
-        "win_rate": 50.0,
-        "total_pnl": 26940.0
+        "trades": 11,
+        "win_rate": 54.5,
+        "total_pnl": 56563.0
       },
       {
         "sym": "CRES",
-        "trades": 15,
-        "win_rate": 46.7,
-        "total_pnl": 15298.0
+        "trades": 16,
+        "win_rate": 50.0,
+        "total_pnl": 45244.0
       },
       {
         "sym": "SUPV",
+        "trades": 11,
+        "win_rate": 36.4,
+        "total_pnl": 32444.0
+      },
+      {
+        "sym": "VALO",
+        "trades": 7,
+        "win_rate": 42.9,
+        "total_pnl": 30226.0
+      },
+      {
+        "sym": "COME",
         "trades": 9,
-        "win_rate": 33.3,
-        "total_pnl": 9473.0
+        "win_rate": 55.6,
+        "total_pnl": 15340.0
       },
       {
         "sym": "BYMA",
-        "trades": 14,
-        "win_rate": 35.7,
-        "total_pnl": -4043.0
+        "trades": 15,
+        "win_rate": 40.0,
+        "total_pnl": 5255.0
+      },
+      {
+        "sym": "METR",
+        "trades": 8,
+        "win_rate": 37.5,
+        "total_pnl": 443.0
       },
       {
         "sym": "PAMP",
-        "trades": 18,
-        "win_rate": 44.4,
-        "total_pnl": -16742.0
+        "trades": 19,
+        "win_rate": 47.4,
+        "total_pnl": -2187.0
       },
       {
-        "sym": "TXAR",
+        "sym": "BBAR",
         "trades": 15,
-        "win_rate": 40.0,
-        "total_pnl": -23458.0
+        "win_rate": 46.7,
+        "total_pnl": -14661.0
       }
     ]
   }
