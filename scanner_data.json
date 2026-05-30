@@ -1621,7 +1621,7 @@
     "sentiment": "neutral"
   },
   "backtesting": {
-    "timestamp": "2026-05-30 02:06",
+    "timestamp": "2026-05-30 02:07",
     "period_start": "2025-05-30",
     "period_end": "2026-05-30",
     "metricas": {
