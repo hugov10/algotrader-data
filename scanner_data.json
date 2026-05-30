@@ -1619,5 +1619,187 @@
     ],
     "count": 37,
     "sentiment": "neutral"
+  },
+  "backtesting": {
+    "timestamp": "2026-05-30 02:06",
+    "period_start": "2025-05-30",
+    "period_end": "2026-05-30",
+    "metricas": {
+      "total_trades": 322,
+      "win_rate": 44.1,
+      "profit_factor": 1.15,
+      "sharpe_ratio": 0.21,
+      "max_drawdown": 49.0,
+      "total_pnl": 447856.0,
+      "total_return": 44.8,
+      "avg_win": 24240.0,
+      "avg_loss": -16821.0,
+      "avg_days": 7.5,
+      "exit_breakdown": {
+        "SL": 134,
+        "TIMEOUT": 104,
+        "TP1": 74,
+        "TP2": 10
+      },
+      "top_trades": [
+        {
+          "entry_date": "2025-10-27",
+          "exit_date": "2025-10-29",
+          "pnl": 59994.0,
+          "pnl_pct": 28.08,
+          "exit_type": "TP2"
+        },
+        {
+          "entry_date": "2025-10-17",
+          "exit_date": "2025-10-27",
+          "pnl": 59957.0,
+          "pnl_pct": 19.46,
+          "exit_type": "TP2"
+        },
+        {
+          "entry_date": "2025-10-23",
+          "exit_date": "2025-10-27",
+          "pnl": 59905.0,
+          "pnl_pct": 15.06,
+          "exit_type": "TP2"
+        }
+      ],
+      "worst_trades": [
+        {
+          "entry_date": "2026-01-26",
+          "exit_date": "2026-01-29",
+          "pnl": -20000.0,
+          "pnl_pct": -5.99,
+          "exit_type": "SL"
+        },
+        {
+          "entry_date": "2026-05-08",
+          "exit_date": "2026-05-12",
+          "pnl": -20000.0,
+          "pnl_pct": -3.33,
+          "exit_type": "SL"
+        },
+        {
+          "entry_date": "2026-02-12",
+          "exit_date": "2026-02-18",
+          "pnl": -19999.0,
+          "pnl_pct": -3.76,
+          "exit_type": "SL"
+        }
+      ],
+      "capital_ini": 1000000,
+      "capital_final": 1447856.0,
+      "monthly_curve": [
+        1000000,
+        1080329.0,
+        1281658.0,
+        1721324.0,
+        1530897.0,
+        1607576.0,
+        1839192.0,
+        1556183.0,
+        1323159.0,
+        1085787.0,
+        1155290.0,
+        1059336.0,
+        1361102.0,
+        1361595.0,
+        1205245.0,
+        1175367.0,
+        1388108.0
+      ]
+    },
+    "ticker_results": [
+      {
+        "sym": "YPFD",
+        "trades": 15,
+        "win_rate": 73.3,
+        "total_pnl": 223556.0
+      },
+      {
+        "sym": "TGSU2",
+        "trades": 18,
+        "win_rate": 61.1,
+        "total_pnl": 115882.0
+      },
+      {
+        "sym": "ALUA",
+        "trades": 17,
+        "win_rate": 52.9,
+        "total_pnl": 103257.0
+      },
+      {
+        "sym": "TECO2",
+        "trades": 16,
+        "win_rate": 43.8,
+        "total_pnl": 94574.0
+      },
+      {
+        "sym": "CEPU",
+        "trades": 17,
+        "win_rate": 41.2,
+        "total_pnl": 71103.0
+      },
+      {
+        "sym": "TRAN",
+        "trades": 15,
+        "win_rate": 60.0,
+        "total_pnl": 66547.0
+      },
+      {
+        "sym": "BMA",
+        "trades": 11,
+        "win_rate": 54.5,
+        "total_pnl": 56563.0
+      },
+      {
+        "sym": "CRES",
+        "trades": 16,
+        "win_rate": 50.0,
+        "total_pnl": 45244.0
+      },
+      {
+        "sym": "SUPV",
+        "trades": 11,
+        "win_rate": 36.4,
+        "total_pnl": 32444.0
+      },
+      {
+        "sym": "VALO",
+        "trades": 7,
+        "win_rate": 42.9,
+        "total_pnl": 30226.0
+      },
+      {
+        "sym": "COME",
+        "trades": 9,
+        "win_rate": 55.6,
+        "total_pnl": 15340.0
+      },
+      {
+        "sym": "BYMA",
+        "trades": 15,
+        "win_rate": 40.0,
+        "total_pnl": 5255.0
+      },
+      {
+        "sym": "METR",
+        "trades": 8,
+        "win_rate": 37.5,
+        "total_pnl": 443.0
+      },
+      {
+        "sym": "PAMP",
+        "trades": 19,
+        "win_rate": 47.4,
+        "total_pnl": -2187.0
+      },
+      {
+        "sym": "BBAR",
+        "trades": 15,
+        "win_rate": 46.7,
+        "total_pnl": -14661.0
+      }
+    ]
   }
 }
