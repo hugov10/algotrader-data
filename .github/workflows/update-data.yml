@@ -1,0 +1,38 @@
+name: Actualizar Scanner AlgoTrader AR
+
+on:
+  schedule:
+    # Cada hora de lunes a viernes, 14:00-20:00 UTC (11:00-17:00 AR)
+    - cron: '0 14-20 * * 1-5'
+  workflow_dispatch:  # Permite ejecutar manualmente desde el celular
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Instalar dependencias
+        run: |
+          pip install yfinance pandas numpy
+
+      - name: Ejecutar scanner
+        run: |
+          python update_scanner.py
+
+      - name: Commit y push
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add scanner_data.json
+          git diff --cached --quiet || git commit -m "📊 Actualización automática scanner — $(date '+%d/%m %H:%M')"
+          git push
