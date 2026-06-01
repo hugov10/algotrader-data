@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0a0c10">
+<title>StockFlow Pro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- ══ FIREBASE CONFIG — REEMPLAZÁ CON TUS DATOS ══════════════════════════════
+     1. Entrá a console.firebase.google.com
+     2. Creá proyecto → Agregar app web
+     3. Copiá el objeto firebaseConfig y reemplazá abajo
+     ═══════════════════════════════════════════════════════════════════════════ -->
+<script>
+const FIREBASE_CONFIG = {
+  apiKey:            "AIzaSyALWC12WkJGM9QEfHGacccQbpJJbR1DqJo",
+  authDomain:        "maxi-inventario.firebaseapp.com",
+  projectId:         "maxi-inventario",
+  storageBucket:     "maxi-inventario.firebasestorage.app",
+  messagingSenderId: "449068103876",
+  appId:             "1:449068103876:web:1fecb8e7a96d0eb510f191"
+};
+</script>
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+
+<style>
+:root {
+  --bg:       #0a0c10;
+  --s1:       #11151c;
+  --s2:       #181d27;
+  --s3:       #1f2535;
+  --border:   #262f42;
+  --blue:     #3b82f6;
+  --blue-g:   rgba(59,130,246,.12);
+  --green:    #10b981;
+  --green-g:  rgba(16,185,129,.12);
+  --red:      #ef4444;
+  --red-g:    rgba(239,68,68,.12);
+  --amber:    #f59e0b;
+  --amber-g:  rgba(245,158,11,.12);
+  --purple:   #8b5cf6;
+  --muted:    #4b5a72;
+  --dim:      #7a8ba6;
+  --text:     #dde4f0;
+  --mono:     'JetBrains Mono', monospace;
+  --sans:     'DM Sans', sans-serif;
+  --display:  'Syne', sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;overflow:hidden;background:var(--bg);}
+body{font-family:var(--sans);color:var(--text);}
+input,button,select,textarea{font-family:var(--sans);}
+input[type=number]{-moz-appearance:textfield;}
+input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;}
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+
+/* ── Layout ── */
+#root{height:100dvh;display:flex;flex-direction:column;max-width:500px;margin:0 auto;position:relative;overflow:hidden;}
+
+/* ── Topbar ── */
+.topbar{
+  background:var(--s1);border-bottom:1px solid var(--border);
+  padding:12px 16px;display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;
+}
+.topbar-brand{font-family:var(--display);font-size:17px;font-weight:800;letter-spacing:-.3px;}
+.topbar-brand span{color:var(--blue);}
+.topbar-user{display:flex;align-items:center;gap:8px;}
+.avatar{
+  width:32px;height:32px;border-radius:8px;
+  background:var(--blue-g);border:1px solid var(--blue);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:800;color:var(--blue);font-family:var(--display);
+}
+.avatar.admin{background:var(--amber-g);border-color:var(--amber);color:var(--amber);}
+.user-name{font-size:12px;font-weight:600;color:var(--dim);}
+.btn-logout{background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:4px;}
+
+/* ── Nav tabs ── */
+.nav{display:flex;background:var(--s1);border-bottom:1px solid var(--border);flex-shrink:0;}
+.nav-btn{
+  flex:1;padding:11px 4px;background:none;border:none;
+  border-bottom:2.5px solid transparent;
+  color:var(--muted);font-size:11px;font-weight:600;
+  cursor:pointer;transition:.15s;letter-spacing:.5px;text-transform:uppercase;
+}
+.nav-btn.active{color:var(--blue);border-bottom-color:var(--blue);}
+.nav-btn .nb-icon{display:block;font-size:16px;margin-bottom:2px;}
+
+/* ── Content ── */
+.screen{flex:1;overflow-y:auto;padding:16px 14px 20px;}
+
+/* ── Cards ── */
+.card{background:var(--s2);border:1px solid var(--border);border-radius:14px;padding:16px 14px;margin-bottom:12px;}
+.card-title{font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;font-weight:700;margin-bottom:14px;font-family:var(--mono);}
+
+/* ── Field ── */
+.field{margin-bottom:12px;}
+.field label{font-size:10px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;font-weight:700;display:block;margin-bottom:6px;font-family:var(--mono);}
+.input{
+  width:100%;background:var(--s1);border:1px solid var(--border);
+  border-radius:10px;padding:11px 13px;color:var(--text);
+  font-size:14px;outline:none;transition:border-color .2s;
+}
+.input:focus{border-color:var(--blue);}
+.input.mono{font-family:var(--mono);font-weight:600;font-size:13px;}
+.input.lg{font-size:17px;font-weight:700;color:var(--blue);}
+select.input{cursor:pointer;}
+
+/* ── Qty controls ── */
+.qty-wrap{display:flex;align-items:center;margin-bottom:12px;}
+.qty-btn{
+  background:var(--s1);border:1px solid var(--border);
+  color:var(--text);width:44px;height:46px;cursor:pointer;
+  font-size:13px;font-weight:700;transition:.15s;flex-shrink:0;
+}
+.qty-btn:active{background:var(--border);}
+.qty-btn.ll{border-radius:10px 0 0 10px;border-right:none;}
+.qty-btn.l{border-radius:0;border-right:none;}
+.qty-btn.r{border-radius:0;border-left:none;}
+.qty-btn.rr{border-radius:0 10px 10px 0;border-left:none;}
+.qty-input{
+  flex:1;text-align:center;background:var(--s1);border:1px solid var(--border);
+  padding:11px 6px;color:var(--blue);font-size:22px;font-weight:900;
+  font-family:var(--mono);outline:none;height:46px;min-width:0;
+}
+.qty-input:focus{border-color:var(--blue);}
+
+/* ── Type toggle ── */
+.type-toggle{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+.type-btn{
+  background:var(--s1);border:2px solid var(--border);
+  border-radius:10px;padding:10px 8px;cursor:pointer;
+  font-weight:700;font-size:13px;transition:.2s;text-align:center;
+}
+.type-btn.in.active{background:var(--green-g);border-color:var(--green);color:var(--green);}
+.type-btn.out.active{background:var(--red-g);border-color:var(--red);color:var(--red);}
+.type-btn:not(.active){color:var(--muted);}
+
+/* ── Primary btn ── */
+.btn{
+  display:block;width:100%;background:var(--blue);color:#fff;
+  border:none;border-radius:10px;padding:13px;
+  font-size:14px;font-weight:700;cursor:pointer;
+  text-transform:uppercase;letter-spacing:.8px;transition:.15s;
+}
+.btn:active{transform:scale(.98);opacity:.9;}
+.btn:disabled{background:var(--border);color:var(--muted);cursor:not-allowed;transform:none;}
+.btn.green{background:var(--green);}
+.btn.red{background:var(--red);}
+.btn.ghost{background:var(--s3);color:var(--text);}
+.btn.sm{padding:9px 14px;font-size:12px;width:auto;}
+
+/* ── Scan button ── */
+.scan-big{
+  width:100%;background:linear-gradient(135deg,var(--s2),var(--s1));
+  border:2px solid var(--border);border-radius:14px;
+  padding:18px 16px;cursor:pointer;margin-bottom:14px;
+  display:flex;align-items:center;gap:14px;transition:.2s;
+}
+.scan-big:active{border-color:var(--blue);background:var(--blue-g);}
+.scan-icon{
+  font-size:32px;width:56px;height:56px;flex-shrink:0;
+  background:var(--blue-g);border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--blue);animation:pulse 2.5s infinite;
+}
+.scan-title{font-size:15px;font-weight:800;color:var(--blue);font-family:var(--display);}
+.scan-sub{font-size:11px;color:var(--muted);margin-top:3px;}
+
+/* ── Movement item ── */
+.mov-item{
+  background:var(--s2);border:1px solid var(--border);border-radius:12px;
+  padding:12px 12px;margin-bottom:8px;display:flex;align-items:center;gap:10px;
+  animation:slideUp .2s both;
+}
+.mov-badge{
+  width:36px;height:36px;border-radius:8px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;
+}
+.mov-badge.in{background:var(--green-g);color:var(--green);}
+.mov-badge.out{background:var(--red-g);color:var(--red);}
+.mov-code{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--blue);}
+.mov-desc{font-size:12px;color:var(--text);margin-top:1px;}
+.mov-meta{font-size:10px;color:var(--muted);margin-top:2px;}
+.mov-qty{font-family:var(--mono);font-size:16px;font-weight:900;text-align:right;flex-shrink:0;}
+.mov-qty.in{color:var(--green);}
+.mov-qty.out{color:var(--red);}
+
+/* ── Product card ── */
+.prod-item{
+  background:var(--s2);border:1px solid var(--border);border-radius:12px;
+  padding:13px 12px;margin-bottom:8px;
+  display:flex;align-items:center;gap:10px;
+  animation:slideUp .2s both;
+}
+.prod-stock{
+  background:var(--blue-g);border:1px solid var(--blue);
+  border-radius:8px;padding:5px 10px;text-align:center;flex-shrink:0;min-width:52px;
+}
+.prod-stock.low{background:var(--red-g);border-color:var(--red);}
+.prod-stock-num{font-size:17px;font-weight:900;color:var(--blue);font-family:var(--mono);line-height:1;}
+.prod-stock.low .prod-stock-num{color:var(--red);}
+.prod-stock-label{font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+
+/* ── Stat cards ── */
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+.stat-card{background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:14px 12px;}
+.stat-val{font-size:26px;font-weight:900;font-family:var(--mono);line-height:1;margin-bottom:3px;}
+.stat-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;}
+
+/* ── User item ── */
+.user-item{
+  background:var(--s2);border:1px solid var(--border);border-radius:12px;
+  padding:13px 12px;margin-bottom:8px;
+  display:flex;align-items:center;gap:10px;
+}
+.user-avatar-lg{
+  width:40px;height:40px;border-radius:10px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;font-weight:800;font-family:var(--display);
+}
+.role-badge{
+  display:inline-block;padding:2px 8px;border-radius:5px;
+  font-size:10px;font-weight:700;letter-spacing:1px;font-family:var(--mono);
+}
+.role-badge.admin{background:var(--amber-g);color:var(--amber);border:1px solid var(--amber);}
+.role-badge.operator{background:var(--blue-g);color:var(--blue);border:1px solid var(--blue);}
+.role-badge.viewer{background:var(--s3);color:var(--muted);border:1px solid var(--border);}
+
+/* ── Login screen ── */
+#login-screen{
+  position:fixed;inset:0;background:var(--bg);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:32px 24px;z-index:500;
+}
+.login-logo{
+  font-family:var(--display);font-size:32px;font-weight:800;
+  margin-bottom:4px;letter-spacing:-1px;
+}
+.login-logo span{color:var(--blue);}
+.login-sub{font-size:13px;color:var(--muted);margin-bottom:36px;text-align:center;}
+.login-card{
+  width:100%;max-width:380px;background:var(--s1);
+  border:1px solid var(--border);border-radius:18px;padding:28px 22px;
+}
+
+/* ── Scanner overlay ── */
+#scan-overlay{
+  position:fixed;inset:0;background:#000;
+  display:none;flex-direction:column;z-index:900;
+}
+#scan-overlay.active{display:flex;}
+#scan-video{width:100%;height:100%;object-fit:cover;flex:1;}
+.scan-hdr{
+  position:absolute;top:0;left:0;right:0;padding:14px 16px;z-index:10;
+  background:linear-gradient(to bottom,rgba(0,0,0,.85),transparent);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.scan-close{
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  color:#fff;border-radius:8px;padding:7px 14px;
+  cursor:pointer;font-weight:700;font-size:13px;
+}
+.scan-frame{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;}
+.scan-box{position:relative;width:260px;height:160px;}
+.corner{position:absolute;width:26px;height:26px;border-radius:2px;}
+.tl{top:0;left:0;border-top:3px solid var(--blue);border-left:3px solid var(--blue);}
+.tr{top:0;right:0;border-top:3px solid var(--blue);border-right:3px solid var(--blue);}
+.bl{bottom:0;left:0;border-bottom:3px solid var(--blue);border-left:3px solid var(--blue);}
+.br{bottom:0;right:0;border-bottom:3px solid var(--blue);border-right:3px solid var(--blue);}
+.scan-line{
+  position:absolute;left:4px;right:4px;height:2px;
+  background:linear-gradient(90deg,transparent,var(--blue),transparent);
+  box-shadow:0 0 8px var(--blue);
+  animation:scanLine 2s ease-in-out infinite;
+}
+.scan-hint{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  background:rgba(0,0,0,.65);backdrop-filter:blur(8px);
+  border-radius:10px;padding:8px 20px;
+  font-size:12px;color:var(--dim);white-space:nowrap;
+}
+
+/* ── Export sheet ── */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);display:flex;align-items:flex-end;justify-content:center;z-index:800;animation:fadeIn .2s;}
+.sheet{background:var(--s2);border-radius:20px 20px 0 0;padding:24px 18px 40px;width:100%;max-width:500px;border:1px solid var(--border);animation:slideUp .25s;}
+.sheet-hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px;}
+.sheet-close{background:var(--border);border:none;border-radius:8px;color:var(--text);width:32px;height:32px;cursor:pointer;font-size:14px;font-weight:700;}
+.exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.exp-btn{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:15px 12px;cursor:pointer;text-align:left;transition:.15s;}
+.exp-btn:active{background:var(--border);}
+.exp-icon{font-size:22px;margin-bottom:6px;}
+.exp-name{font-size:13px;font-weight:700;}
+.exp-sub{font-size:10px;color:var(--muted);margin-top:2px;}
+
+/* ── Modal ── */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;z-index:950;padding:20px;animation:fadeIn .15s;}
+.modal{background:var(--s2);border:1px solid var(--border);border-radius:16px;padding:24px 20px;width:100%;max-width:380px;animation:slideUp .2s;}
+.modal h3{font-size:16px;font-weight:800;margin-bottom:16px;font-family:var(--display);}
+
+/* ── Toast ── */
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);border-radius:10px;padding:10px 20px;font-weight:700;font-size:13px;z-index:9999;animation:slideUp .2s;white-space:nowrap;}
+.toast.success{background:var(--green);color:#000;box-shadow:0 4px 20px rgba(16,185,129,.4);}
+.toast.error{background:var(--red);color:#fff;}
+.toast.info{background:var(--blue);color:#fff;}
+
+/* ── Loading ── */
+.loading{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:999;flex-direction:column;gap:12px;}
+.spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite;}
+
+/* ── Empty ── */
+.empty{text-align:center;padding:50px 20px;color:var(--muted);}
+.empty-icon{font-size:44px;margin-bottom:12px;}
+.empty-title{font-size:15px;font-weight:700;color:var(--dim);margin-bottom:6px;}
+
+/* ── Filter row ── */
+.filter-row{display:flex;gap:8px;margin-bottom:12px;overflow-x:auto;padding-bottom:2px;}
+.filter-btn{
+  flex-shrink:0;background:var(--s2);border:1px solid var(--border);
+  border-radius:8px;padding:6px 12px;cursor:pointer;
+  font-size:11px;font-weight:700;color:var(--muted);transition:.15s;
+  white-space:nowrap;
+}
+.filter-btn.active{background:var(--blue-g);border-color:var(--blue);color:var(--blue);}
+
+/* ── Divider ── */
+.divider{height:1px;background:var(--border);margin:14px 0;}
+
+/* ── Inline actions ── */
+.row-actions{display:flex;gap:6px;margin-top:8px;}
+.icon-btn{background:var(--s3);border:1px solid var(--border);border-radius:6px;padding:5px 10px;cursor:pointer;color:var(--dim);font-size:12px;transition:.15s;}
+.icon-btn:active{background:var(--border);}
+.icon-btn.blue{color:var(--blue);border-color:var(--blue);background:var(--blue-g);}
+.icon-btn.red{color:var(--red);border-color:var(--red);background:var(--red-g);}
+
+/* ── Animations ── */
+@keyframes scanLine{0%{top:10%;opacity:0;}10%{opacity:1;}90%{opacity:1;}100%{top:88%;opacity:0;}}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+@keyframes slideUp{from{transform:translateY(14px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes spin{to{transform:rotate(360deg);}}
+</style>
+</head>
+<body>
+
+<!-- ══ LOADING ══ -->
+<div id="loading" class="loading">
+  <div class="spinner"></div>
+  <div style="font-size:13px;color:var(--muted);">Conectando…</div>
+</div>
+
+<!-- ══ LOGIN ══ -->
+<div id="login-screen" style="display:none">
+  <div style="text-align:center">
+    <div class="login-logo">Stock<span>Flow</span></div>
+    <div class="login-sub">Sistema de inventario colaborativo</div>
+  </div>
+  <div class="login-card">
+    <div class="field">
+      <label>Email</label>
+      <input class="input" type="email" id="login-email" placeholder="usuario@empresa.com" autocomplete="email">
+    </div>
+    <div class="field">
+      <label>Contraseña</label>
+      <input class="input" type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password"
+        onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <button class="btn" onclick="doLogin()" id="login-btn">Ingresar</button>
+    <div id="login-err" style="color:var(--red);font-size:12px;margin-top:10px;text-align:center;display:none;"></div>
+    <div style="text-align:center;margin-top:14px;font-size:12px;color:var(--muted)">
+      ¿Primera vez? <span style="color:var(--blue);cursor:pointer" onclick="showRegister()">Crear cuenta</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ REGISTER ══ -->
+<div id="register-screen" style="display:none;position:fixed;inset:0;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;z-index:500;">
+  <div style="text-align:center;margin-bottom:28px">
+    <div class="login-logo">Stock<span>Flow</span></div>
+    <div class="login-sub">Crear nueva cuenta</div>
+  </div>
+  <div class="login-card">
+    <div class="field">
+      <label>Nombre completo</label>
+      <input class="input" type="text" id="reg-name" placeholder="Juan Pérez">
+    </div>
+    <div class="field">
+      <label>Email</label>
+      <input class="input" type="email" id="reg-email" placeholder="usuario@empresa.com">
+    </div>
+    <div class="field">
+      <label>Contraseña</label>
+      <input class="input" type="password" id="reg-pass" placeholder="Mínimo 6 caracteres">
+    </div>
+    <button class="btn" onclick="doRegister()" id="reg-btn">Crear cuenta</button>
+    <div id="reg-err" style="color:var(--red);font-size:12px;margin-top:10px;text-align:center;display:none;"></div>
+    <div style="text-align:center;margin-top:14px;font-size:12px;color:var(--muted)">
+      <span style="color:var(--blue);cursor:pointer" onclick="showLogin()">← Volver al login</span>
+    </div>
+    <div style="font-size:11px;color:var(--muted);margin-top:12px;text-align:center;line-height:1.5">
+      La cuenta queda pendiente hasta que un admin la apruebe
+    </div>
+  </div>
+</div>
+
+<!-- ══ MAIN APP ══ -->
+<div id="app" style="display:none;height:100dvh;flex-direction:column;max-width:500px;margin:0 auto;">
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="topbar-brand">Stock<span>Flow</span></div>
+    <div class="topbar-user">
+      <div>
+        <div class="user-name" id="topbar-name">-</div>
+        <div style="font-size:10px;color:var(--muted);text-align:right" id="topbar-role">-</div>
+      </div>
+      <div class="avatar" id="topbar-avatar">?</div>
+      <button class="btn-logout" onclick="doLogout()" title="Salir">⏏</button>
+    </div>
+  </div>
+
+  <!-- Nav -->
+  <div class="nav" id="main-nav">
+    <button class="nav-btn active" id="nav-scan" onclick="goTab('scan')">
+      <span class="nb-icon">📷</span>Escanear
+    </button>
+    <button class="nav-btn" id="nav-stock" onclick="goTab('stock')">
+      <span class="nb-icon">📦</span>Stock
+    </button>
+    <button class="nav-btn" id="nav-movs" onclick="goTab('movs')">
+      <span class="nb-icon">📋</span>Movimientos
+    </button>
+    <button class="nav-btn" id="nav-admin" onclick="goTab('admin')" style="display:none">
+      <span class="nb-icon">⚙️</span>Admin
+    </button>
+  </div>
+
+  <!-- ═══ TAB SCAN ═══ -->
+  <div class="screen" id="tab-scan">
+
+    <button class="scan-big" onclick="openScanner()">
+      <div class="scan-icon">📸</div>
+      <div>
+        <div class="scan-title">ESCANEAR CÓDIGO</div>
+        <div class="scan-sub">EAN-13, QR, Code128, UPC…</div>
+      </div>
+    </button>
+
+    <div class="card">
+      <div class="card-title">📝 Registrar movimiento</div>
+
+      <!-- Tipo entrada/salida -->
+      <div style="margin-bottom:12px">
+        <label class="field" style="display:block;font-size:10px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;font-weight:700;margin-bottom:6px;font-family:var(--mono)">Tipo de movimiento</label>
+        <div class="type-toggle">
+          <button class="type-btn in active" id="type-in" onclick="setType('in')">▲ ENTRADA</button>
+          <button class="type-btn out" id="type-out" onclick="setType('out')">▼ SALIDA</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Código de barras</label>
+        <input class="input mono" type="text" id="f-barcode" placeholder="Escaneá o ingresá manualmente" autocomplete="off" autocorrect="off">
+      </div>
+
+      <div class="field">
+        <label>Descripción del producto</label>
+        <input class="input" type="text" id="f-desc" placeholder="Ej: Cable USB-C 1m Negro">
+      </div>
+
+      <div class="field">
+        <label>Cantidad</label>
+        <div class="qty-wrap">
+          <button class="qty-btn ll" onclick="addQty(-10)">−10</button>
+          <button class="qty-btn l"  onclick="addQty(-1)">−1</button>
+          <input  class="qty-input" type="number" id="f-qty" value="1" min="1">
+          <button class="qty-btn r"  onclick="addQty(1)">+1</button>
+          <button class="qty-btn rr" onclick="addQty(10)">+10</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Nota (opcional)</label>
+        <input class="input" type="text" id="f-note" placeholder="Ej: Compra proveedor, Venta #123…">
+      </div>
+
+      <button class="btn" id="save-mov-btn" onclick="saveMovement()">✓ CONFIRMAR MOVIMIENTO</button>
+    </div>
+
+    <!-- Último movimiento -->
+    <div id="last-mov-wrap" style="display:none">
+      <div class="card-title" style="margin-bottom:8px;font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;font-weight:700;font-family:var(--mono)">Último movimiento</div>
+      <div id="last-mov-content"></div>
+    </div>
+
+  </div>
+
+  <!-- ═══ TAB STOCK ═══ -->
+  <div class="screen" id="tab-stock" style="display:none">
+    <div style="display:flex;gap:8px;margin-bottom:12px">
+      <input class="input" type="text" id="stock-search" placeholder="🔍 Buscar código o descripción…" oninput="renderStock()" style="flex:1">
+      <button class="btn sm" onclick="openExport('stock')">📤</button>
+    </div>
+    <div class="stats-grid" id="stock-stats">
+      <div class="stat-card"><div class="stat-val" id="st-products" style="color:var(--blue)">-</div><div class="stat-label">Productos</div></div>
+      <div class="stat-card"><div class="stat-val" id="st-units" style="color:var(--green)">-</div><div class="stat-label">Unidades</div></div>
+    </div>
+    <div id="stock-list"></div>
+  </div>
+
+  <!-- ═══ TAB MOVIMIENTOS ═══ -->
+  <div class="screen" id="tab-movs" style="display:none">
+    <div style="display:flex;gap:8px;margin-bottom:10px">
+      <input class="input" type="text" id="mov-search" placeholder="🔍 Buscar…" oninput="renderMovs()" style="flex:1">
+      <button class="btn sm" onclick="openExport('movs')">📤</button>
+    </div>
+    <div class="filter-row" id="mov-filters">
+      <button class="filter-btn active" onclick="setMovFilter('all',this)">Todos</button>
+      <button class="filter-btn" onclick="setMovFilter('in',this)">▲ Entradas</button>
+      <button class="filter-btn" onclick="setMovFilter('out',this)">▼ Salidas</button>
+    </div>
+    <div id="movs-list"></div>
+  </div>
+
+  <!-- ═══ TAB ADMIN ═══ -->
+  <div class="screen" id="tab-admin" style="display:none">
+    <div class="card">
+      <div class="card-title">📊 Resumen del sistema</div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-val" id="adm-users" style="color:var(--blue)">-</div><div class="stat-label">Usuarios</div></div>
+        <div class="stat-card"><div class="stat-val" id="adm-movs" style="color:var(--green)">-</div><div class="stat-label">Movimientos</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+        <div class="card-title" style="margin-bottom:0">👥 Usuarios</div>
+        <button class="btn sm" onclick="showCreateUser()">+ Nuevo</button>
+      </div>
+      <div id="users-list"></div>
+    </div>
+  </div>
+
+</div><!-- /app -->
+
+<!-- ══ SCANNER OVERLAY ══ -->
+<div id="scan-overlay">
+  <div class="scan-hdr">
+    <div>
+      <div style="font-size:9px;font-family:var(--mono);letter-spacing:2px;color:var(--blue);text-transform:uppercase">▸ StockFlow</div>
+      <div style="font-size:16px;font-weight:800;color:#fff">ESCANEAR CÓDIGO</div>
+      <div style="font-size:11px;font-family:var(--mono);color:var(--blue);margin-top:2px" id="scan-status">Iniciando cámara…</div>
+    </div>
+    <button class="scan-close" onclick="closeScanner()">✕ Cerrar</button>
+  </div>
+  <video id="scan-video" playsinline muted></video>
+  <div class="scan-frame">
+    <div class="scan-box">
+      <div class="corner tl"></div><div class="corner tr"></div>
+      <div class="corner bl"></div><div class="corner br"></div>
+      <div class="scan-line"></div>
+    </div>
+  </div>
+  <div class="scan-hint">Apuntá el código dentro del marco</div>
+</div>
+
+<!-- ══ EXPORT SHEET ══ -->
+<div class="overlay" id="export-overlay" style="display:none" onclick="if(event.target.id==='export-overlay')closeExport()">
+  <div class="sheet">
+    <div class="sheet-hdr">
+      <div>
+        <div style="font-size:17px;font-weight:800;font-family:var(--display)">Exportar datos</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:3px" id="exp-sub"></div>
+      </div>
+      <button class="sheet-close" onclick="closeExport()">✕</button>
+    </div>
+    <div class="exp-grid">
+      <button class="exp-btn" onclick="doExport('csv')"><div class="exp-icon">📊</div><div class="exp-name">CSV</div><div class="exp-sub">Excel / Sheets</div></button>
+      <button class="exp-btn" onclick="doExport('txt')"><div class="exp-icon">📄</div><div class="exp-name">TXT</div><div class="exp-sub">Texto plano</div></button>
+      <button class="exp-btn" style="border-color:var(--blue);background:var(--blue-g)" onclick="doExport('share')"><div class="exp-icon">📤</div><div class="exp-name" style="color:var(--blue)" id="share-lbl">Compartir</div><div class="exp-sub">WhatsApp, Mail…</div></button>
+      <button class="exp-btn" onclick="doExport('wa')"><div class="exp-icon">💬</div><div class="exp-name">WhatsApp</div><div class="exp-sub">Enviar directo</div></button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ USER MODAL ══ -->
+<div class="modal-bg" id="user-modal" style="display:none">
+  <div class="modal">
+    <h3 id="user-modal-title">Gestionar usuario</h3>
+    <div class="field">
+      <label>Nombre</label>
+      <input class="input" type="text" id="um-name" placeholder="Juan Pérez">
+    </div>
+    <div class="field">
+      <label>Email</label>
+      <input class="input" type="email" id="um-email" placeholder="usuario@empresa.com">
+    </div>
+    <div class="field" id="um-pass-field">
+      <label>Contraseña inicial</label>
+      <input class="input" type="password" id="um-pass" placeholder="Mínimo 6 caracteres">
+    </div>
+    <div class="field">
+      <label>Rol</label>
+      <select class="input" id="um-role">
+        <option value="operator">Operador — puede registrar movimientos</option>
+        <option value="viewer">Visor — solo puede ver stock</option>
+        <option value="admin">Administrador — acceso total</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Estado</label>
+      <select class="input" id="um-status">
+        <option value="active">Activo</option>
+        <option value="inactive">Inactivo (bloqueado)</option>
+      </select>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:4px">
+      <button class="btn ghost" style="flex:1" onclick="closeUserModal()">Cancelar</button>
+      <button class="btn" style="flex:1" onclick="saveUser()" id="um-save-btn">Guardar</button>
+    </div>
+    <div id="um-err" style="color:var(--red);font-size:12px;margin-top:10px;text-align:center;display:none"></div>
+  </div>
+</div>
+
+<!-- ══ CONFIRM MODAL ══ -->
+<div class="modal-bg" id="confirm-modal" style="display:none">
+  <div class="modal">
+    <h3>Confirmar acción</h3>
+    <p id="confirm-msg" style="font-size:14px;color:var(--dim);line-height:1.5;margin-bottom:22px"></p>
+    <div style="display:flex;gap:10px">
+      <button class="btn ghost" style="flex:1" onclick="closeConfirm()">Cancelar</button>
+      <button class="btn red" style="flex:1" id="confirm-ok">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TOAST ══ -->
+<div id="toast" style="display:none"></div>
+
+<!-- ══ FIREBASE ══ -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script>
+// ════════════════════════════════════════════════════════════
+// INIT FIREBASE
+// ════════════════════════════════════════════════════════════
+firebase.initializeApp(FIREBASE_CONFIG);
+const auth = firebase.auth();
+const db   = firebase.firestore();
+
+// ── State ──────────────────────────────────────────────────
+let currentUser  = null;  // Firebase user
+let currentProfile = null; // Firestore profile
+let allMovements = [];
+let allProducts  = {};    // barcode → {desc, stock}
+let allUsers     = [];
+let movFilter    = 'all';
+let exportMode   = 'movs';
+let editingUserId = null;
+let scanStream   = null;
+let scanRAF      = null;
+let detector     = null;
+let movType      = 'in';
+
+// ════════════════════════════════════════════════════════════
+// AUTH
+// ════════════════════════════════════════════════════════════
+auth.onAuthStateChanged(async user => {
+  if (user) {
+    currentUser = user;
+    const snap = await db.collection('users').doc(user.uid).get();
+    if (!snap.exists) {
+      // Create pending profile for new self-registered users
+      await db.collection('users').doc(user.uid).set({
+        name: user.displayName || user.email.split('@')[0],
+        email: user.email,
+        role: 'operator',
+        status: 'pending',
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      await auth.signOut();
+      showToast('Tu cuenta está pendiente de aprobación', 'info', 4000);
+      showLogin();
+      return;
+    }
+    currentProfile = snap.data();
+    if (currentProfile.status === 'inactive') {
+      await auth.signOut();
+      showErr('login-err', 'Tu cuenta está inactiva. Contactá al administrador.');
+      showLoginScreen();
+      return;
+    }
+    if (currentProfile.status === 'pending') {
+      await auth.signOut();
+      showErr('login-err', 'Tu cuenta está pendiente de aprobación.');
+      showLoginScreen();
+      return;
+    }
+    startApp();
+  } else {
+    currentUser = null; currentProfile = null;
+    showLoginScreen();
+  }
+});
+
+function showLoginScreen() {
+  hide('loading'); hide('app');
+  show('login-screen', 'flex');
+  hide('register-screen');
+}
+function showLogin(){ show('login-screen','flex'); hide('register-screen'); }
+function showRegister(){ hide('login-screen'); show('register-screen','flex'); }
+
+async function doLogin() {
+  const email = v('login-email'); const pass = v('login-pass');
+  if (!email || !pass) { showErr('login-err','Completá todos los campos'); return; }
+  const btn = el('login-btn'); btn.disabled = true; btn.textContent = 'Ingresando…';
+  hideEl('login-err');
+  try {
+    await auth.signInWithEmailAndPassword(email, pass);
+  } catch(e) {
+    const msgs = {
+      'auth/user-not-found':'Usuario no encontrado',
+      'auth/wrong-password':'Contraseña incorrecta',
+      'auth/invalid-credential':'Email o contraseña incorrectos',
+      'auth/too-many-requests':'Demasiados intentos. Esperá unos minutos.',
+    };
+    showErr('login-err', msgs[e.code] || e.message);
+    btn.disabled = false; btn.textContent = 'Ingresar';
+  }
+}
+
+async function doRegister() {
+  const name = v('reg-name'); const email = v('reg-email'); const pass = v('reg-pass');
+  if (!name || !email || !pass) { showErr('reg-err','Completá todos los campos'); return; }
+  if (pass.length < 6) { showErr('reg-err','La contraseña debe tener al menos 6 caracteres'); return; }
+  const btn = el('reg-btn'); btn.disabled = true; btn.textContent = 'Creando…';
+  hideEl('reg-err');
+  try {
+    const cred = await auth.createUserWithEmailAndPassword(email, pass);
+    await cred.user.updateProfile({ displayName: name });
+    await db.collection('users').doc(cred.user.uid).set({
+      name, email, role:'operator', status:'pending',
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    await auth.signOut();
+    showLogin();
+    showToast('Cuenta creada. Esperá aprobación del admin.', 'info', 4000);
+  } catch(e) {
+    const msgs = {
+      'auth/email-already-in-use':'Ese email ya está registrado',
+      'auth/invalid-email':'Email inválido',
+    };
+    showErr('reg-err', msgs[e.code] || e.message);
+  }
+  btn.disabled = false; btn.textContent = 'Crear cuenta';
+}
+
+async function doLogout() {
+  await auth.signOut();
+}
+
+// ════════════════════════════════════════════════════════════
+// START APP
+// ════════════════════════════════════════════════════════════
+function startApp() {
+  hide('loading'); hide('login-screen'); hide('register-screen');
+  const appEl = el('app');
+  appEl.style.display = 'flex';
+
+  // Topbar
+  el('topbar-name').textContent    = currentProfile.name;
+  el('topbar-role').textContent    = roleLabel(currentProfile.role);
+  el('topbar-avatar').textContent  = currentProfile.name.charAt(0).toUpperCase();
+  if (currentProfile.role === 'admin') {
+    el('topbar-avatar').classList.add('admin');
+    show('nav-admin');
+  }
+  if (currentProfile.role === 'viewer') {
+    // Hide scan tab for viewers
+    el('nav-scan').style.display = 'none';
+  }
+
+  // Realtime listeners
+  db.collection('movements').orderBy('createdAt','desc').limit(200)
+    .onSnapshot(snap => {
+      allMovements = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      computeStock();
+      renderStock(); renderMovs();
+      updateAdminStats();
+      renderLastMov();
+    });
+
+  if (currentProfile.role === 'admin') {
+    db.collection('users').onSnapshot(snap => {
+      allUsers = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      renderUsers(); updateAdminStats();
+    });
+  }
+
+  goTab(currentProfile.role === 'viewer' ? 'stock' : 'scan');
+}
+
+// ════════════════════════════════════════════════════════════
+// TABS
+// ════════════════════════════════════════════════════════════
+let currentTab = 'scan';
+function goTab(tab) {
+  currentTab = tab;
+  ['scan','stock','movs','admin'].forEach(t => {
+    el('tab-'+t) && (el('tab-'+t).style.display = t===tab ? 'block' : 'none');
+    el('nav-'+t) && el('nav-'+t).classList.toggle('active', t===tab);
+  });
+  if (tab === 'stock')  renderStock();
+  if (tab === 'movs')   renderMovs();
+  if (tab === 'admin')  renderUsers();
+}
+
+// ════════════════════════════════════════════════════════════
+// MOVEMENTS
+// ════════════════════════════════════════════════════════════
+function setType(t) {
+  movType = t;
+  el('type-in').classList.toggle('active', t==='in');
+  el('type-out').classList.toggle('active', t==='out');
+}
+
+function addQty(d) {
+  const inp = el('f-qty');
+  inp.value = Math.max(1, (parseInt(inp.value)||1)+d);
+}
+
+async function saveMovement() {
+  if (currentProfile.role === 'viewer') { showToast('Sin permiso para registrar movimientos','error'); return; }
+  const barcode = v('f-barcode').trim();
+  const desc    = v('f-desc').trim();
+  const qty     = Math.max(1, parseInt(v('f-qty'))||1);
+  const note    = v('f-note').trim();
+  if (!barcode) { el('f-barcode').focus(); showToast('Ingresá un código','error'); return; }
+
+  const btn = el('save-mov-btn');
+  btn.disabled = true; btn.textContent = 'Guardando…';
+
+  try {
+    await db.collection('movements').add({
+      barcode, desc, qty, note,
+      type: movType,
+      userId:   currentUser.uid,
+      userName: currentProfile.name,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    // Clear form
+    el('f-barcode').value = ''; el('f-desc').value = '';
+    el('f-qty').value = 1; el('f-note').value = '';
+    showToast(`✓ ${movType==='in'?'Entrada':'Salida'}: ${barcode} (${qty} uds)`, 'success');
+    if (navigator.vibrate) navigator.vibrate([80,40,80]);
+  } catch(e) {
+    showToast('Error al guardar: '+e.message, 'error');
+  }
+  btn.disabled = false; btn.textContent = '✓ CONFIRMAR MOVIMIENTO';
+}
+
+function computeStock() {
+  const stock = {};
+  const desc  = {};
+  // Process oldest first
+  [...allMovements].reverse().forEach(m => {
+    if (!stock[m.barcode]) stock[m.barcode] = 0;
+    if (m.desc) desc[m.barcode] = m.desc;
+    stock[m.barcode] += m.type === 'in' ? m.qty : -m.qty;
+  });
+  allProducts = {};
+  Object.keys(stock).forEach(bc => {
+    allProducts[bc] = { stock: stock[bc], desc: desc[bc] || '' };
+  });
+}
+
+function renderLastMov() {
+  if (allMovements.length === 0) { hide('last-mov-wrap'); return; }
+  show('last-mov-wrap');
+  const m = allMovements[0];
+  el('last-mov-content').innerHTML = movHTML(m);
+}
+
+function movHTML(m) {
+  const ts = m.createdAt?.toDate ? fmtDate(m.createdAt.toDate()) : '…';
+  return `
+    <div class="mov-item">
+      <div class="mov-badge ${m.type}">${m.type==='in'?'+':'-'}</div>
+      <div style="flex:1;min-width:0">
+        <div class="mov-code">${esc(m.barcode)}</div>
+        <div class="mov-desc">${esc(m.desc||'Sin descripción')}</div>
+        <div class="mov-meta">👤 ${esc(m.userName||'?')} · ${ts}${m.note?` · ${esc(m.note)}`:''}  </div>
+      </div>
+      <div>
+        <div class="mov-qty ${m.type}">${m.type==='in'?'+':'-'}${m.qty}</div>
+      </div>
+    </div>`;
+}
+
+let movFilterVal = 'all';
+function setMovFilter(f, btn) {
+  movFilterVal = f;
+  document.querySelectorAll('#mov-filters .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderMovs();
+}
+
+function renderMovs() {
+  const q = v('mov-search').toLowerCase();
+  let list = allMovements;
+  if (movFilterVal !== 'all') list = list.filter(m => m.type === movFilterVal);
+  if (q) list = list.filter(m =>
+    (m.barcode||'').toLowerCase().includes(q) ||
+    (m.desc||'').toLowerCase().includes(q) ||
+    (m.userName||'').toLowerCase().includes(q) ||
+    (m.note||'').toLowerCase().includes(q)
+  );
+  const container = el('movs-list');
+  if (list.length === 0) {
+    container.innerHTML = `<div class="empty"><div class="empty-icon">📋</div><div class="empty-title">Sin movimientos</div></div>`;
+    return;
+  }
+  container.innerHTML = list.slice(0,100).map(movHTML).join('');
+}
+
+// ════════════════════════════════════════════════════════════
+// STOCK
+// ════════════════════════════════════════════════════════════
+function renderStock() {
+  const q = (v('stock-search')||'').toLowerCase();
+  let prods = Object.entries(allProducts);
+  if (q) prods = prods.filter(([bc,p]) =>
+    bc.toLowerCase().includes(q) || (p.desc||'').toLowerCase().includes(q)
+  );
+  prods.sort((a,b) => a[0].localeCompare(b[0]));
+
+  const total = prods.reduce((s,[,p]) => s+(p.stock||0), 0);
+  el('st-products').textContent = prods.length;
+  el('st-units').textContent    = total;
+
+  const container = el('stock-list');
+  if (prods.length === 0) {
+    container.innerHTML = `<div class="empty"><div class="empty-icon">📦</div><div class="empty-title">Sin productos</div><div style="font-size:12px;color:var(--muted)">Registrá tu primer movimiento</div></div>`;
+    return;
+  }
+  container.innerHTML = prods.map(([bc,p], idx) => `
+    <div class="prod-item" style="animation-delay:${idx*.02}s">
+      <div style="flex:1;min-width:0">
+        <div style="font-family:var(--mono);font-size:12px;font-weight:700;color:var(--blue)">${esc(bc)}</div>
+        <div style="font-size:12px;color:var(--dim);margin-top:2px">${esc(p.desc||'Sin descripción')}</div>
+      </div>
+      <div class="prod-stock ${p.stock<=0?'low':''}">
+        <div class="prod-stock-num">${p.stock}</div>
+        <div class="prod-stock-label">uds</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ════════════════════════════════════════════════════════════
+// ADMIN
+// ════════════════════════════════════════════════════════════
+function updateAdminStats() {
+  el('adm-users') && (el('adm-users').textContent = allUsers.length);
+  el('adm-movs')  && (el('adm-movs').textContent  = allMovements.length);
+}
+
+function renderUsers() {
+  const container = el('users-list');
+  if (!container) return;
+  if (allUsers.length === 0) {
+    container.innerHTML = `<div class="empty" style="padding:20px"><div class="empty-title">Sin usuarios</div></div>`;
+    return;
+  }
+  container.innerHTML = allUsers.map(u => {
+    const initials = (u.name||'?').charAt(0).toUpperCase();
+    const colors = {admin:'var(--amber)',operator:'var(--blue)',viewer:'var(--muted)',pending:'var(--muted)'};
+    const bgc = `rgba(${u.role==='admin'?'245,158,11':u.role==='operator'?'59,130,246':'107,114,128'},.15)`;
+    return `
+    <div class="user-item">
+      <div class="user-avatar-lg" style="background:${bgc};color:${colors[u.role]||'var(--muted)'}">${initials}</div>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:13px;font-weight:700">${esc(u.name||'Sin nombre')}</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:1px">${esc(u.email||'')}</div>
+        <div style="margin-top:5px;display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+          <span class="role-badge ${u.role}">${roleLabel(u.role)}</span>
+          ${u.status==='inactive'?'<span style="font-size:10px;color:var(--red)">● INACTIVO</span>':''}
+          ${u.status==='pending'?'<span style="font-size:10px;color:var(--amber)">● PENDIENTE</span>':''}
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:5px">
+        <button class="icon-btn blue" onclick="editUser('${u.id}')">✏</button>
+        ${u.id !== currentUser.uid ? `<button class="icon-btn red" onclick="confirmDeleteUser('${u.id}')">✕</button>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function showCreateUser() {
+  editingUserId = null;
+  el('user-modal-title').textContent = 'Crear usuario';
+  el('um-name').value = ''; el('um-email').value = '';
+  el('um-pass').value = ''; el('um-role').value = 'operator';
+  el('um-status').value = 'active';
+  show('um-pass-field');
+  hideEl('um-err');
+  show('user-modal','flex');
+}
+
+function editUser(uid) {
+  const u = allUsers.find(x => x.id === uid);
+  if (!u) return;
+  editingUserId = uid;
+  el('user-modal-title').textContent = 'Editar usuario';
+  el('um-name').value = u.name||''; el('um-email').value = u.email||'';
+  el('um-pass').value = ''; el('um-role').value = u.role||'operator';
+  el('um-status').value = u.status||'active';
+  hide('um-pass-field');
+  hideEl('um-err');
+  show('user-modal','flex');
+}
+
+function closeUserModal() { hide('user-modal'); }
+
+async function saveUser() {
+  const name   = v('um-name').trim();
+  const email  = v('um-email').trim();
+  const pass   = v('um-pass').trim();
+  const role   = v('um-role');
+  const status = v('um-status');
+  if (!name || !email) { showErr('um-err','Nombre y email son obligatorios'); return; }
+
+  const btn = el('um-save-btn');
+  btn.disabled = true; btn.textContent = 'Guardando…';
+  hideEl('um-err');
+
+  try {
+    if (editingUserId) {
+      // Update existing
+      await db.collection('users').doc(editingUserId).update({ name, email, role, status });
+      showToast('✓ Usuario actualizado', 'success');
+    } else {
+      // Create new via Firebase Admin is not available client-side
+      // We create auth user then Firestore doc
+      if (!pass || pass.length < 6) { showErr('um-err','Contraseña de al menos 6 caracteres'); btn.disabled=false; btn.textContent='Guardar'; return; }
+      // Use secondary app trick to avoid signing out current user
+      const secondary = firebase.initializeApp(FIREBASE_CONFIG, 'secondary');
+      const secAuth = secondary.auth();
+      const cred = await secAuth.createUserWithEmailAndPassword(email, pass);
+      await cred.user.updateProfile({ displayName: name });
+      const newUid = cred.user.uid;
+      await secAuth.signOut();
+      await secondary.delete();
+      await db.collection('users').doc(newUid).set({
+        name, email, role, status,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        createdBy: currentUser.uid
+      });
+      showToast('✓ Usuario creado', 'success');
+    }
+    closeUserModal();
+  } catch(e) {
+    const msgs = {
+      'auth/email-already-in-use':'Ese email ya está registrado',
+      'auth/invalid-email':'Email inválido',
+    };
+    showErr('um-err', msgs[e.code] || e.message);
+  }
+  btn.disabled = false; btn.textContent = 'Guardar';
+}
+
+function confirmDeleteUser(uid) {
+  const u = allUsers.find(x => x.id === uid);
+  showConfirm(`¿Eliminar al usuario "${u?.name}"?\nEsta acción no se puede deshacer.`, async () => {
+    await db.collection('users').doc(uid).delete();
+    showToast('Usuario eliminado', 'success');
+  });
+}
+
+// ════════════════════════════════════════════════════════════
+// SCANNER
+// ════════════════════════════════════════════════════════════
+function openScanner() {
+  el('scan-overlay').classList.add('active');
+  el('scan-status').textContent = 'Iniciando cámara…';
+  if (!('BarcodeDetector' in window)) {
+    el('scan-status').textContent = '⚠ Sin soporte — usá entrada manual';
+    setTimeout(closeScanner, 2500); return;
+  }
+  detector = new BarcodeDetector({
+    formats:['ean_13','ean_8','code_128','code_39','code_93','upc_a','upc_e','qr_code','data_matrix','itf']
+  });
+  navigator.mediaDevices.getUserMedia({
+    video:{ facingMode:'environment', width:{ideal:1280}, height:{ideal:720} }
+  }).then(stream => {
+    scanStream = stream;
+    const vid = el('scan-video');
+    vid.srcObject = stream; vid.play();
+    el('scan-status').textContent = 'Apuntá al código de barras';
+    scanLoop();
+  }).catch(e => { el('scan-status').textContent = '⚠ Sin cámara: '+e.message; });
+}
+function scanLoop() {
+  const vid = el('scan-video');
+  if (!detector||!vid||vid.readyState<2) { scanRAF=requestAnimationFrame(scanLoop); return; }
+  detector.detect(vid).then(codes => {
+    if (codes.length>0) { closeScanner(); onCode(codes[0].rawValue); }
+    else scanRAF = requestAnimationFrame(scanLoop);
+  }).catch(()=>{ scanRAF=requestAnimationFrame(scanLoop); });
+}
+function closeScanner() {
+  cancelAnimationFrame(scanRAF);
+  if (scanStream) { scanStream.getTracks().forEach(t=>t.stop()); scanStream=null; }
+  el('scan-overlay').classList.remove('active');
+}
+function onCode(code) {
+  el('f-barcode').value = code;
+  // Prellenar descripción si ya existe
+  if (allProducts[code]?.desc) el('f-desc').value = allProducts[code].desc;
+  if (navigator.vibrate) navigator.vibrate([80,40,80]);
+  showToast('✓ Código: '+code, 'info', 1800);
+  el('f-qty').focus();
+}
+
+// ════════════════════════════════════════════════════════════
+// EXPORT
+// ════════════════════════════════════════════════════════════
+function openExport(mode) {
+  exportMode = mode;
+  const count = mode==='stock' ? Object.keys(allProducts).length : allMovements.length;
+  el('exp-sub').textContent = `${count} ${mode==='stock'?'productos':'movimientos'}`;
+  show('export-overlay','flex');
+}
+function closeExport() { hide('export-overlay'); }
+
+function buildCSV() {
+  if (exportMode === 'stock') {
+    const head = 'Código,Descripción,Stock';
+    const rows = Object.entries(allProducts).map(([bc,p]) => `"${bc}","${p.desc||''}","${p.stock}"`);
+    return [head,...rows].join('\n');
+  }
+  const head = 'Fecha,Código,Descripción,Tipo,Cantidad,Usuario,Nota';
+  const rows = allMovements.map(m => {
+    const ts = m.createdAt?.toDate ? fmtDate(m.createdAt.toDate()) : '';
+    return `"${ts}","${m.barcode}","${m.desc||''}","${m.type==='in'?'ENTRADA':'SALIDA'}","${m.qty}","${m.userName||''}","${m.note||''}"`;
+  });
+  return [head,...rows].join('\n');
+}
+
+function buildTXT() {
+  const now = new Date().toLocaleString('es-AR');
+  if (exportMode === 'stock') {
+    const lines = Object.entries(allProducts).map(([bc,p],n) =>
+      `${String(n+1).padStart(3,'0')} | ${bc.padEnd(20)} | ${String(p.stock).padStart(6)} uds | ${p.desc||''}`
+    );
+    return [`══════════════════════════════════`,
+      `  STOCK — StockFlow Pro`,
+      `  Exportado: ${now}`,
+      `  Productos: ${lines.length}`,
+      `══════════════════════════════════`,
+      ...lines,
+      `══════════════════════════════════`].join('\n');
+  }
+  const lines = allMovements.map((m,n) => {
+    const ts = m.createdAt?.toDate ? fmtDate(m.createdAt.toDate()) : '?';
+    return `${String(n+1).padStart(3,'0')} | ${(m.type==='in'?'ENTRADA':'SALIDA ').padEnd(7)} | ${m.barcode.padEnd(15)} | ${String(m.qty).padStart(5)} uds | ${m.userName||'?'} | ${ts}`;
+  });
+  return [`══════════════════════════════════════════`,
+    `  MOVIMIENTOS — StockFlow Pro`,
+    `  Exportado: ${now}`,
+    `  Total: ${lines.length}`,
+    `══════════════════════════════════════════`,
+    ...lines,
+    `══════════════════════════════════════════`].join('\n');
+}
+
+function download(content, fname, mime) {
+  const blob = new Blob([content],{type:mime});
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href=url; a.download=fname; a.click();
+  URL.revokeObjectURL(url);
+}
+
+async function doExport(type) {
+  const stamp = Date.now();
+  const prefix = exportMode==='stock' ? 'stock' : 'movimientos';
+  if (type==='csv') { download(buildCSV(), `${prefix}_${stamp}.csv`, 'text/csv;charset=utf-8;'); showToast('✓ CSV descargado','success'); }
+  if (type==='txt') { download(buildTXT(), `${prefix}_${stamp}.txt`, 'text/plain;charset=utf-8;'); showToast('✓ TXT descargado','success'); }
+  if (type==='share') {
+    const text = buildTXT();
+    if (navigator.share) { try { await navigator.share({title:'StockFlow',text}); return; } catch(e){} }
+    try { await navigator.clipboard.writeText(text); el('share-lbl').textContent='¡Copiado!'; setTimeout(()=>el('share-lbl').textContent='Compartir',2000); showToast('✓ Copiado','success'); } catch(e){}
+  }
+  if (type==='wa') {
+    window.open('https://wa.me/?text='+encodeURIComponent(buildTXT()),'_blank');
+  }
+}
+
+// ════════════════════════════════════════════════════════════
+// HELPERS
+// ════════════════════════════════════════════════════════════
+function roleLabel(r) {
+  return {admin:'Administrador',operator:'Operador',viewer:'Visor',pending:'Pendiente'}[r] || r;
+}
+function fmtDate(d) {
+  return new Date(d).toLocaleString('es-AR',{day:'2-digit',month:'2-digit',year:'2-digit',hour:'2-digit',minute:'2-digit'});
+}
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function el(id){ return document.getElementById(id); }
+function v(id) { return el(id)?.value||''; }
+function show(id, d='block'){ const e=el(id); if(e) e.style.display=d; }
+function hide(id){ const e=el(id); if(e) e.style.display='none'; }
+function hideEl(id){ hide(id); }
+function showErr(id,msg){ const e=el(id); if(e){ e.textContent=msg; e.style.display='block'; } }
+
+function showToast(msg, type='success', dur=2500) {
+  const t = el('toast');
+  t.textContent=msg; t.className='toast '+type; t.style.display='block';
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(()=>t.style.display='none', dur);
+}
+
+let confirmCb = null;
+function showConfirm(msg, cb) {
+  el('confirm-msg').textContent = msg;
+  show('confirm-modal','flex');
+  el('confirm-ok').onclick = ()=>{ closeConfirm(); cb(); };
+}
+function closeConfirm(){ hide('confirm-modal'); }
+</script>
+</body>
+</html>
