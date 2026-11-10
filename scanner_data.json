@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-11-09 23:19",
-  "fecha": "09/11/2026",
-  "hora": "23:19",
+  "timestamp": "2026-11-10 20:45",
+  "fecha": "10/11/2026",
+  "hora": "20:45",
   "panel": {
     "data": [
       {
@@ -26,29 +26,6 @@
         "atr": 17.89,
         "bid": 529.94,
         "ask": 532.06
-      },
-      {
-        "sym": "MIRG",
-        "price": 1740.0,
-        "chgPct": -0.57,
-        "vol": 3523,
-        "volRatio": 0.11,
-        "rsi": 54.2,
-        "rsiPrev": 56.3,
-        "macd": "bearish",
-        "trend": "uptrend",
-        "bb": "middle",
-        "score": 60,
-        "rec": "BUY",
-        "sl": 1583.04,
-        "sl_pct": 9.02,
-        "tp1": 2001.61,
-        "tp2": 2210.89,
-        "sup": 1630.0,
-        "res": 1895.0,
-        "atr": 104.64,
-        "bid": 1736.52,
-        "ask": 1743.48
       },
       {
         "sym": "CTIO",
@@ -670,6 +647,29 @@
         "atr": 35.61,
         "bid": 772.45,
         "ask": 775.55
+      },
+      {
+        "sym": "MIRG",
+        "price": 1740.0,
+        "chgPct": -0.57,
+        "vol": 3523,
+        "volRatio": 0.11,
+        "rsi": 54.2,
+        "rsiPrev": 56.3,
+        "macd": "bearish",
+        "trend": "downtrend",
+        "bb": "middle",
+        "score": 35,
+        "rec": "SELL",
+        "sl": 1583.04,
+        "sl_pct": 9.02,
+        "tp1": 2001.61,
+        "tp2": 2210.89,
+        "sup": 1630.0,
+        "res": 1895.0,
+        "atr": 104.64,
+        "bid": 1736.52,
+        "ask": 1743.48
       },
       {
         "sym": "BBAR",
